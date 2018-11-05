@@ -37,9 +37,9 @@
                         <a href="#"><span class="fa fa-files-o"></span> <span class="xn-text">Gestión Escolar</span></a>
                         <ul>
                             <li><a href="<?php echo base_url();?>dashboard/matricula"><span class="fa fa-image"></span> Control de Matricula</a></li>
-                            <li><a href="pages-profile.html"><span class="fa fa-user"></span> Control de Asistencia</a></li>
-                            <li><a href="pages-address-book.html"><span class="fa fa-users"></span> Control de Notas</a></li>                               
-                            <li><a href="pages-messages.html"><span class="fa fa-comments"></span> Asignacion de cursos</a></li>
+                            <li><a href="<?php echo base_url();?>dashboard/asistencia"><span class="fa fa-user"></span> Control de Asistencia</a></li>
+                            <li><a href="<?php echo base_url();?>dashboard/control_notas"><span class="fa fa-users"></span> Control de Notas</a></li>                               
+                            <li><a href="<?php echo base_url();?>dashboard/asignar_cursos"><span class="fa fa-comments"></span> Asignacion de cursos</a></li>
                         </ul>
                     </li> 
                     <li class="xn-openable">

@@ -2,3 +2,9 @@ PASOS DE GIT
 http://rogerdudler.github.io/git-guide/index.es.html
 
 https://medium.com/@sthefany/primeros-pasos-con-github-7d5e0769158c
+
+
+subir archivos:
+git add .   =========> el (.) sube todos los archivos
+git commit - m "descripcion"  ========> realiza descripcion de los echos
+git push -u origin master     ========> sube todos los cambios a master

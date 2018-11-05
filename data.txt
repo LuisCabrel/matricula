@@ -1,0 +1,17 @@
+## DIRECTOR ##
+-foto
+-nombres
+-apellidos
+-dni
+-fecha nacimiento
+-especialidad
+-telefono
+-direccion
+-curriculum en pdf
+
+
+
+### PROFESORES
+-
+alumnos
+asignaturas

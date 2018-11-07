@@ -1,4 +1,7 @@
+<style type="text/css">
+  
 
+</style>
     <body>
         <!-- START PAGE CONTAINER -->
         <div class="page-container">
@@ -34,26 +37,56 @@
                         <a href="<?php echo base_url(); ?>dashboard"><span class="fa fa-desktop"></span> <span class="xn-text">Dashboard</span></a>     
                     </li> 
                     <li class="xn-openable">
-                        <a href="#"><span class="fa fa-files-o"></span> <span class="xn-text">Gestión Escolar</span></a>
+                        <a href="#"><span class="fa fa-book"></span> <span class="xn-text">Gestión Escolar</span></a>
                         <ul>
-                            <li><a href="<?php echo base_url();?>dashboard/matricula"><span class="fa fa-image"></span> Control de Matricula</a></li>
-                            <li><a href="<?php echo base_url();?>dashboard/asistencia"><span class="fa fa-user"></span> Control de Asistencia</a></li>
-                            <li><a href="<?php echo base_url();?>dashboard/control_notas"><span class="fa fa-users"></span> Control de Notas</a></li>                               
-                            <li><a href="<?php echo base_url();?>dashboard/asignar_cursos"><span class="fa fa-comments"></span> Asignacion de cursos</a></li>
+                            <li class="li"><a href="<?php echo base_url();?>dashboard/matricula"><span class="fa fa-file-text-o"></span> Control de Matricula</a></li>
+                            <li class="li"><a href="<?php echo base_url();?>dashboard/asignar_cursos"><span class="glyphicon glyphicon-book"></span> Asignacion de cursos</a>
+                            <li class="li"><a href="pages-gallery.html"><span class="glyphicon glyphicon-usd"></span> Consulta de Pagos</a></li>
+                            <li class="li"><a href="pages-gallery.html"><span class="fa fa-bar-chart-o"></span> Reporte de Pagos</a></li>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="xn-openable">
+                        <a href="#"><span class="fa fa-files-o"></span> <span class="xn-text">Personal</span></a>
+                        <ul>
+                            <li class="li"><a href="<?php echo base_url();?>personal/registro_personal"><span class="fa fa-address-card-o"></span> Registro Personal</a></li>
+                            <li class="li"><a href="pages-gallery.html"><span class="glyphicon glyphicon-lock"></span> Registro de Especialidad</a></li>
+                        </ul>
+                    </li>
+                    <li class="xn-openable">
+                        <a href="#"><span class="fa fa-group"></span> <span class="xn-text">Estudiante</span></a>
+                        <ul>
+                            <li class="li"><a href="<?php echo base_url();?>estudiante/registro_estudiante"><span class="fa fa-id-card-o"></span> Registro Estudiante</a></li>
+                            <li class="li"><a href="<?php echo base_url();?>dashboard/asistencia"><span class="fa fa-check-circle"></span> Control de Asistencia</a></li>                            
+                        </ul>
+                    </li>
+                    <li class="xn-openable">
+                        <a href="#"><span class="fa fa-book"></span> <span class="xn-text">Asignaturas</span></a>
+                        <ul>
+                            <li class="li"><a href="<?php echo base_url();?>dashboard/control_notas"><span class="fa fa-book"></span> Registro de Asignaturas</a></li>
                         </ul>
                     </li> 
                     <li class="xn-openable">
-                        <a href="#"><span class="fa fa-files-o"></span> <span class="xn-text">Informes</span></a>
+                        <a href="#"><span class="fa fa-files-o"></span> <span class="xn-text">Notas</span></a>
                         <ul>
-                            <li><a href="pages-gallery.html"> Gallery</a></li>
+                            <li class="li"><a href="<?php echo base_url();?>dashboard/control_notas"><span class="fa fa-file-text-o"></span> Registro de Notas</a></li>
+                            <li class="li"><a href="<?php echo base_url();?>estudiante/registro_estudiante"><span class="fa fa-print"></span> Imprimir Notas</a></li>
+                        </ul>
+                    </li>                      
+                    <li class="xn-openable">
+                        <a href="#"><span class="fa fa-table"></span> <span class="xn-text">Reportes</span></a>
+                        <ul>
+                            <li class="li"><a href="pages-gallery.html"><span class="fa fa-table"></span> Reporte de Estudiante</a></li>
+                            <li class="li"><a href="pages-gallery.html"><span class="fa fa-table"></span> Reporte de Personal</a></li>
                         </ul>
                     </li>  
                     <li class="xn-openable">
-                        <a href="#"><span class="fa fa-files-o"></span> <span class="xn-text">Mantenimiento</span></a>
+                        <a href="#"><span class="fa fa-cog"></span> <span class="xn-text">Mantenimiento</span></a>
                         <ul>
-                            <li><a href="pages-gallery.html"> Gallery</a></li>
+                            <li class="li"><a href="<?php echo base_url();?>Mantenimiento/escuela"><span class="fa fa-university"></span> Registrar Escuela</a></li>
                         </ul>
-                    </li>                                    
+                    </li> 
+                    <li></li>                                   
                 </ul>
                 <!-- END X-NAVIGATION -->
             </div>

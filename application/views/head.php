@@ -10,8 +10,11 @@
         <link rel="icon" href="<?php echo base_url(); ?>asset/gorra.ico" type="image/x-icon" />
         <!-- END META SECTION -->
         
-        <!-- CSS INCLUDE -->        
+        <!-- CSS INCLUDE --> 
+              
         <link rel="stylesheet" type="text/css" id="theme" href="<?php echo base_url(); ?>asset/css/theme-default.css"/>
+        <link rel="stylesheet" type="text/css" id="theme" href="<?php echo base_url(); ?>asset/css/libre.css"/> 
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>asset/font-awesome-4.7.0/css/font-awesome.css">
         <!-- <link rel="stylesheet" type="text/css" id="theme" href="bootstrap/css/bootstrap.css"/> -->
         <!-- EOF CSS INCLUDE -->
     </head>

@@ -22,7 +22,7 @@ class Ubigeo_model extends CI_Model{
 			$cadena.="<option value='{$reg['idProv']}'>{$reg['provincia']}</option>";
 		}
 
-		echo "<option value='0'>Seleccione...</option>".$cadena;
+		echo "<option value=''>Seleccione...</option>".$cadena;
 	}
 
 	public function distritos($codpro)
@@ -35,20 +35,9 @@ class Ubigeo_model extends CI_Model{
 			$cadena.="<option value='{$reg['idDist']}'>{$reg['distrito']}</option>";
 		}
 
-		echo '<option value="0">Seleccione...</option>'.$cadena;
+		echo '<option value="">Seleccione...</option>'.$cadena;
 	}
 
-	public function devolverCentros($coddis)
-	{
-		$sql = $this->db->where('distrito_id', $coddis)->get('centros');
-
-		$cadena = "";
-
-		foreach ($sql->result_array() as $reg) {
-			$cadena.="<option value='{$reg['id']}'>{$reg['descen']}</option>";
-		}
-
-		echo $cadena;
-	}
+	
 
 }

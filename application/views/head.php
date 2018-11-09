@@ -15,6 +15,11 @@
         <link rel="stylesheet" type="text/css" id="theme" href="<?php echo base_url(); ?>asset/css/theme-default.css"/>
         <link rel="stylesheet" type="text/css" id="theme" href="<?php echo base_url(); ?>asset/css/libre.css"/> 
         <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>asset/font-awesome-4.7.0/css/font-awesome.css">
+
+        <script type="text/javascript" src="<?php echo base_url(); ?>asset/js/plugins/jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="<?php echo base_url(); ?>asset/js/plugins/jquery/jquery-ui.min.js"></script>
+        
         <!-- <link rel="stylesheet" type="text/css" id="theme" href="bootstrap/css/bootstrap.css"/> -->
         <!-- EOF CSS INCLUDE -->
     </head>
+    

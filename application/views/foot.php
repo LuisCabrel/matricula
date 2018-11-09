@@ -10,8 +10,7 @@
         
     <!-- START SCRIPTS -->
         <!-- START PLUGINS -->
-        <script type="text/javascript" src="<?php echo base_url(); ?>asset/js/plugins/jquery/jquery.min.js"></script>
-        <script type="text/javascript" src="<?php echo base_url(); ?>asset/js/plugins/jquery/jquery-ui.min.js"></script>
+      
         <script type="text/javascript" src="<?php echo base_url(); ?>asset/js/plugins/bootstrap/bootstrap.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url(); ?>asset/js/img.js"></script>   
         <script type="text/javascript" src="<?php echo base_url(); ?>asset/js/funciones_generales.js"></script>  
@@ -24,12 +23,13 @@
 
         <!-- START TEMPLATE -->
         <script type="text/javascript" src="<?php echo base_url(); ?>asset/js/plugins.js"></script>        
-        <script type="text/javascript" src="<?php echo base_url(); ?>asset/js/actions.js"></script>        
+        <script type="text/javascript" src="<?php echo base_url(); ?>asset/js/actions.js"></script> 
+
         <!-- END TEMPLATE -->
     <!-- END SCRIPTS --> 
-    <script type="text/javascript">
-     var path = '<?php echo base_url()?>';
-    </script>        
+        <script type="text/javascript">
+         var path = '<?php echo base_url()?>';
+        </script>
     </body>
 </html>
 

@@ -26,48 +26,51 @@
                         <li><a href="#" class="panel-remove"><span class="fa fa-times"></span></a></li>
                     </ul>
                     <div class="panel-body">
-                        <form>
+                        <form id="formRegEsc">
+                         
                             <div class="col-md-12">
-                                <div class="form-group col-md-3">
-                                    <label for="exampleInputFile">Foto de Escuela</label>
-                                    <input id="file-upload" type="file" accept="image/*" />
+                                <div class="form-group col-md-3" id="1">
+                                    <label class="control-label">Foto de Escuela</label>
+                                    <input id="file-upload" type="file" accept="image/*" id="foto" name="foto" />
                                     <br>
                                     <div class="col-md-3">
+                                      <input type="hidden" name="imgF" id="imgF">
                                         <img id="imgSalida" width="200" height="130" src="" />
                                     </div>
                                   </div>
-                                  <div class="form-group col-md-6">                                        
+                                  <div class="form-group col-md-6" id="2">  
+                                   <?php echo validation_errors(); ?>                                      
                                       <label class="control-label">Nombre de Escuela</label>
-                                      <input type="text" class="form-control" id="nom_escuela" placeholder="">
+                                      <input type="text" class="form-control" id="nom_escuela" name="nom_escuela" value="">
                                     </div>
-                                    <div class="form-group col-md-3">                                        
+                                    <div class="form-group col-md-3" id="3">                                        
                                       <label class="control-label">Ruc</label>
-                                      <input type="text" class="form-control numeric" id="ruc" placeholder="">
+                                      <input type="text" class="form-control numeric" id="ruc" name="ruc" placeholder="">
                                     </div>
-                                    <div class="form-group col-md-3">                                        
+                                    <div class="form-group col-md-3" id="4">                                        
                                      <label class="control-label">Direccíon</label>
-                                      <input type="text" class="form-control" id="direccion" placeholder="">
+                                      <input type="text" class="form-control" id="direccion"  name="direccion"placeholder="">
                                     </div>
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-3" id="5">
                                         <label class="control-label">Telefonos</label>
-                                        <input type="text" class="form-control" id="telefonos" placeholder="">
+                                        <input type="text" class="form-control" id="telefonos" name="telefonos" placeholder="">
                                     </div>
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-3" id="6">
                                         <label class="control-label">Correo Corporativo</label>
-                                        <input type="text" class="form-control" id="correo" placeholder="">
+                                        <input type="text" class="form-control" id="correo" name="correo" placeholder="">
                                     </div>
-                                    <div class="form-group col-md-3">
-                                      <label for="sel1">Zona</label>
-                                      <select class="form-control" id="zona">
-                                        <option value="0">Seleccione...</option>
+                                    <div class="form-group col-md-3" id="7">
+                                      <label class="control-label">Zona</label>
+                                      <select class="form-control" id="zona" name="zona">
+                                        <option value="">Seleccione...</option>
                                         <option value="Urbana">Urbana</option>
                                         <option value="Rural">Rural</option>
                                       </select>
                                     </div>
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-3" id="8">
                                         <label class="control-label">Turnos</label>
                                         <div class="form-group">
-                                            <select id="turnos" name="turnos[]"  class="form-control col-md-3 multi-select-dd" multiple="multiple" >                     
+                                            <select id="turnos" name="turnos"  class="form-control col-md-3 multi-select-dd" multiple="multiple" >                     
                                                 <option value="Inicial">Inicial</option>
                                                 <option value="Dia"> Día</option>      
                                                 <option value="Tarde">Tarde</option>
@@ -75,32 +78,32 @@
                                             </select>   
                                         </div>
                                     </div>
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-3" id="9">
                                         <label class="control-label">Año de Creación</label>
-                                        <input type="text" class="form-control" id="creacion" placeholder="">
+                                        <input type="text" class="form-control" id="creacion" name="creacion" placeholder="">
                                     </div>
-                                    <div class="form-group col-md-3">
-                                      <label for="sel1">Departamento</label><span class="fs-arrow"></span>
-                                      <select class="form-control" id="departamento">
-                                        <option value="0">Seleccione...</option>
+                                    <div class="form-group col-md-3" id="10">
+                                      <label class="control-label">Departamento</label><!-- <span class="fs-arrow"></span> -->
+                                      <select class="form-control" id="departamento" name="departamento">
+                                        <option value="">Seleccione...</option>
                                         <?php foreach ($dptos as $dpto) {?>
                                         <option value="<?php echo $dpto->idDepa ?>"><?php echo $dpto->departamento?></option>
                                         <?php } ?>
                                       </select>
                                     </div>
-                                    <div class="form-group col-md-3">
-                                      <label for="sel1">Provincia</label><span class="fs-arrow"></span>
-                                      <select class="form-control" id="provincia">                                          
+                                    <div class="form-group col-md-3" id="11">
+                                      <label class="control-label">Provincia</label><span class="fs-arrow"></span>
+                                      <select class="form-control" id="provincia" name="provincia">                                          
                                       </select>
                                     </div>
-                                    <div class="form-group col-md-3">
-                                      <label for="sel1">Distrito</label><span class="fs-arrow"></span>
-                                      <select class="form-control" id="distrito">
+                                    <div class="form-group col-md-3" id="12">
+                                      <label class="control-label">Distrito</label><span class="fs-arrow"></span>
+                                      <select class="form-control" id="distrito" name="distrito">
                                       </select>
                                     </div>                                
                             </div> 
                             <div class="form-group col-xs-12 col-md-3 formBTn">
-                              <button type="submit" class="btn btn-info col-xs-12">Guadar</button>  
+                              <button class="btn btn-info col-xs-12" id="save_escuela">Guadar</button>  
                             </div>
                                       
                         </form>
@@ -112,6 +115,7 @@
     <!-- END WIDGETS --> 
 </div>            
 <!-- END PAGE CONTENT -->
+<script type="text/javascript" src="<?php echo base_url(); ?>asset/js/mantenimiento.js"></script> 
 <?php
  $this->load->view('foot');
 ?>

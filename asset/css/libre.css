@@ -4,6 +4,11 @@ li .li a{
   border-left: 10px solid #17191e;
   border-bottom-color: #47494c;
 }
+.btn_modal{
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
 /*.multiselect-container{position:absolute;list-style-type:none;margin:0;padding:0}
 .multiselect-container .input-group{margin:5px}
 .multiselect-container>li{padding:0}
@@ -207,4 +212,28 @@ li .li a{
 	float: left;
 	margin-top: -50px;
 }
+}
+
+.form-control-feedback {    
+    padding-top:20px;
+    padding-right:20px;
+}
+i.btn-tabla-edit{
+    color:#ec971f;
+    font-size: 22px;
+    padding:2px;
+    cursor: pointer;
+}
+i.btn-tabla-edit:hover {
+  color: #c9821a;
+ 
+}
+i.btn-tabla-delete{
+    color:#c9302c;
+    font-size: 20px;
+    padding:2px;
+    cursor: pointer;
+}
+i.btn-tabla-delete:hover {
+ color: #ac2925;
 }

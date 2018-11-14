@@ -14,7 +14,9 @@
         <script type="text/javascript" src="<?php echo base_url(); ?>asset/js/plugins/bootstrap/bootstrap.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url(); ?>asset/js/img.js"></script>   
         <script type="text/javascript" src="<?php echo base_url(); ?>asset/js/funciones_generales.js"></script>  
-        <script type="text/javascript" src="<?php echo base_url(); ?>bootstrap/js/fSelect.js"></script>  
+        <script type="text/javascript" src="<?php echo base_url(); ?>bootstrap/js/fSelect.js"></script>
+        <!-- <script type="text/javascript" src="<?php echo base_url(); ?>bootstrap/js/bootstrap-select.min.js"></script> -->
+        <script type="text/javascript" src="<?php echo base_url(); ?>bootstrap/js/bootstrap-datepicker.js"></script>  
         <!-- END PLUGINS -->
 
         <!-- THIS PAGE PLUGINS -->

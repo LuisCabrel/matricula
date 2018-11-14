@@ -18,7 +18,7 @@ class Mantenimiento extends CI_Controller {
 		$this->load->view('content/mantenimiento/escuela',$data);
 	}
 
-	public function file_check($str){
+	/*public function file_check($str){
         $allowed_mime_type_arr = array('application/pdf','image/gif','image/jpeg','image/pjpeg','image/png','image/x-png');
         $mime = get_mime_by_extension($_FILES['file']['name']);
         if(isset($_FILES['file']['name']) && $_FILES['file']['name']!=""){
@@ -32,21 +32,42 @@ class Mantenimiento extends CI_Controller {
             $this->form_validation->set_message('file_check', 'Seleccione un archivo para subir.');
             return false;
         }
-    }
+    }*/
+    public function lista_escuela(){
+		$scholl = $this->mantenimiento->lista_escuela();
+		if ($scholl!=false) {
+            $data=[
+                "resp"=>"true",
+                "datos"=>$scholl,
+            ];
+         }else{
+            $data=[
+                "resp"=>"false",
+                "msg"=>"No se encontro información en la base de datos",
+            ];
+         }
+         echo json_encode($data);
+	}
 
+	/*public function lista_escuela(){    	
+        $lista= $this->mantenimiento->lista_escuela();
+        $lista=$lista->result_array();    	
+    	return $this->outputjson->writeJson($lista);
+        
+    }*/
 
 	public function registrar_escuela(){
 		$json = array();
-		// $img = array();
-		//$this->form_validation->set_rules('foto','Foto','callback_file_check');
-		$this->form_validation->set_rules('imgF','ImgF','required');
+		/*$x=$this->input->post('turnos_');
+		var_dump($x);exit;*/
+		$this->form_validation->set_rules('imgF1','ImgF','required');
 		$this->form_validation->set_rules('nom_escuela','Nom_escuela','required');
 		$this->form_validation->set_rules('ruc','Ruc','required');
 		$this->form_validation->set_rules('direccion','Direccion','required');
 		$this->form_validation->set_rules('telefonos','Telefonos','required');
-		$this->form_validation->set_rules('correo','Correo','required');
+		$this->form_validation->set_rules('correo','Correo','required|valid_email');
 		$this->form_validation->set_rules('zona','Zona','required');
-		$this->form_validation->set_rules('turnos','Turnos','required');
+		$this->form_validation->set_rules('turnos_','Turnos','required');
 		$this->form_validation->set_rules('creacion','Creacion','required');
 		$this->form_validation->set_rules('departamento','Departamento','required');
 		$this->form_validation->set_rules('provincia','Provincia','required');
@@ -55,7 +76,7 @@ class Mantenimiento extends CI_Controller {
 		if($this->form_validation->run()==FALSE){
 			$json = array(
 				'msg' => FALSE,
-				'1' => form_error('imgF', '<span class="mt-3 has-error">', '</span>'),
+				'1' => form_error('imgF1', '<span class="mt-3 has-error">', '</span>'),
                 '2' => form_error('nom_escuela', '<span class="mt-3 has-error">', '</span>'),
                 '3'=>form_error('ruc','<span class="mt-3 has-error">','</span>'),
 				'4'=>form_error('direccion','<span class="mt-3 has-error">','</span>'),
@@ -70,72 +91,84 @@ class Mantenimiento extends CI_Controller {
             );
 		}else{
 			/* insertando imagen en carpeta */
-			$this->input->post('foto');
-			//upload configuration
-                $config['upload_path']   = './uploads/colegio/';
-                $config['allowed_types'] = 'gif|jpg|png|pdf';
-                $config['max_size']      = 1024;
-                $config['max_width']      = 5418;
-                $config['max_height']      = 3048;
-                $this->load->library('upload', $config);
+			$config=[
+			"upload_path"=>"./uploads/colegio",
+			"allowed_types"=>"png|jpeg|jpg|ico",
+			"max_size" => 1024,
+			"max_width"  => 1024,
+			"max_height"  => 768
+			];			
+                $this->load->library('upload', $config);                
                 
-                //upload configuration
-                $config['upload_path']   = './uploads/colegio/';
-                $config['allowed_types'] = 'gif|jpg|png|pdf';
-                $config['max_size']      = 1024;
-                $this->load->library('upload', $config);
-                //upload file to directory
-                if($this->upload->do_upload('foto')){
-                    $uploadData = $this->upload->data();
-                    $uploadedFile = $uploadData['file_name'];
+                if($this->upload->do_upload('foto1')){
+                	$data=array("upload_data"=>$this->upload->data());
+					 $datos=array();
                     
-                    /*
-                     *insert file information into the database
-                     *.......
-                     */
-                    
-                    $img = TRUE;
-                }else{
-                    $img =$this->input->post('foto');;
-                }
-            /* fin insertando imagen en carpeta */    
-            if($img==TRUE){
-	            	/*$data = array(
-			        'nombre' => $this->input->post('nom_escuela'),
-			        'ruc' => $this->input->post('ruc'),
-			        'direccion' => $this->input->post('direccion'),
-			        'telefono' => $this->input->post('telefonos'),
-			        'email' => $this->input->post('correo'),
-			        'zonas' => $this->input->post('zona'),
-			        'turno' => $this->input->post('turnos'),
-			        'creacion' => $this->input->post('creacion'),
-			        'departamento' => $this->input->post('departamento'),
-			        'provincia' => $this->input->post('provincia'),
-			        'distrito' => $this->input->post('distrito'),
-			        //'foto' => $this->input->post('nombre');,
-				);
-				$save=$this->mantenimiento_model->guardar_escuela($data);
-				if($save==TRUE){
-					$json = array(
-					'msg' => TRUE,
+                    $datos[] = array(
+				        'nombre' => $this->input->post('nom_escuela'),
+				        'ruc' => $this->input->post('ruc'),
+				        'direccion' => $this->input->post('direccion'),
+				        'telefono' => $this->input->post('telefonos'),
+				        'email' => $this->input->post('correo'),
+				        'zona' => $this->input->post('zona'),
+				        'turnos' => $this->input->post('turnos_'),
+				        'creacion' => $this->input->post('creacion'),
+				        'departamento' => $this->input->post('departamento'),
+				        'provincia' => $this->input->post('provincia'),
+				        'distrito' => $this->input->post('distrito'),
+				        'foto' => $data['upload_data']['file_name'],
 					);
+                    $save=$this->mantenimiento->guardar_escuela($datos);
+                    if ($save=TRUE) {
+                    	$msg=1;
+					 	$resp="Se registro Datos de la empresa";						 	
+					}else{
+						$msg=2;
+					 	$resp="Error al Registrar Datos";					 	
+					}
+					                 
 				}else{
-					$json = array(
-					'msg' => "Error al Guardar Datos",
-					);
-				}*//*borra est3e json*/
-				$json = array(
-					'msg' => "insertado Imagen",
-					);
-            }else{
-            	$json = array(
-					'msg' => $img,
-					);
-            }
-			
-			
+					$error=$this->upload->display_errors();
+					$msg=3;
+					$resp=$error;					
+				}
+			$json=array(			 		
+			 		"msg"=>$msg,
+			 		"resp"=>$resp,
+			 	);				
 		}
-		echo json_encode($json);
+		echo json_encode($json);	
 	}
-	
+
+	public function delete_school(){
+		$id=$this->input->post('id');
+		$delete = $this->mantenimiento->delete_school($id);
+		if ($delete=true) {
+            $data=[
+                "resp"=>"true",
+                "msg"=>"Se elimino Registro",
+            ];
+         }else{
+            $data=[
+                "resp"=>"false",
+                "msg"=>"Error al Eliminar Registro",
+            ];
+         }
+         echo json_encode($data);
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

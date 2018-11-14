@@ -10,7 +10,8 @@ var btn_delete2='" style="margin:2px;">Eliminar</button>';
 var ico_elimina='<span class="glyphicon glyphicon-trash" aria-hidden="true" style="font-size:30px;align-content: center;color: #ac2925"></span>';
 var ico_ok='<span class="glyphicon glyphicon-ok-circle" aria-hidden="true" style="font-size:30px;align-content: center;color: #4cae4c"></span>';
 var msg_delete='Desea Eliminar Datos';
-var loading='<img src="'+path+'asset/img/loaders/loading.gif" width="40px;" height="40px;" />';
+var msg_eliminando='Elimininando Datos';
+var loading='<div align="center"><img src="'+path+'asset/img/loaders/loading.gif" width="40px;" height="40px;" /></div> ';
 
 function cargarProvincias () {
 	var cd = $('#departamento').val();

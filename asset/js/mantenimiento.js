@@ -89,6 +89,7 @@ function tbl_escuela(){
 function msgDelete(id){
 	$("#btn_modal").html(btn_delete1+"del_school("+id+")"+btn_delete2+" "+btn_cerrar);
 	$("#ico").html(ico_elimina);
+	 $("#loading").hide();
 	$("#msg1").html(msg_delete);
 	$("#alertas").modal('show');
 }
@@ -102,15 +103,17 @@ function del_school(id) {
 		beforeSend: function () {
 			 $("#ico").hide();
 			 $("#loading_bg").html(loading);
+			 $("#msg1").html(msg_eliminando);
 		     $("#loading").show();
 		        },
 		success: function(resp){
         	var x = JSON.parse(resp);
                 tbl_escuela();
-        		$("#ico").html(ico);
-        		$("#loading").hide();
-        		$("#loader").show();
-				$("#msg").html(x.msg);
+                $("#loading").hide();
+        		$("#ico").html(ico_ok);
+        		$("#ico").show();        		
+        		//$("#loader").show();
+				$("#msg1").html(x.msg);
 				$("#btn_modal").html(btn_cerrar);
 	            $("#alertas").modal('show');	
         }

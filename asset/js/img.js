@@ -37,7 +37,7 @@ function previewImage(nb) {
     };     
 }
 
-(function($) {
+/*(function($) {
     $(function() {
        $('#turnos').fSelect({
         placeholder: 'Seleccione Turnos?',
@@ -48,11 +48,18 @@ function previewImage(nb) {
          buttonWidth: '400px'
        });
     });
-})(jQuery);
+})(jQuery);*/
 
-$('#turnos').change(function(){
-  $('#turnos_').val($('#turnos').val());
- });
+
 /*$('#turnos').change(function(){
   $('#turnos_').val($('#turnos').val());
  });*/
+ function checkbox(f, x) {
+  console.log(f);
+  console.log(x);
+ todos = new Array();
+ for (var i = 0, total = f[x].length; i < total; i++)
+   if (f[x][i].checked) todos[todos.length] = f[x][i].value;
+  // return todos.join(".");
+  $('#turnos_').val(todos);
+}

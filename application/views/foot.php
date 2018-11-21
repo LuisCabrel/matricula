@@ -1,7 +1,9 @@
 </div>
         <!-- END PAGE CONTAINER -->
 
-        
+        <script type="text/javascript">
+         var path = '<?php echo base_url()?>';
+        </script>
 
         <!-- START PRELOADS -->
         <audio id="audio-alert" src="<?php echo base_url(); ?>asset/audio/alert.mp3" preload="auto"></audio>
@@ -29,9 +31,7 @@
 
         <!-- END TEMPLATE -->
     <!-- END SCRIPTS --> 
-        <script type="text/javascript">
-         var path = '<?php echo base_url()?>';
-        </script>
+        
     </body>
 </html>
 

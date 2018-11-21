@@ -13,6 +13,53 @@ class Mantenimiento extends CI_Controller {
 		
 	}
 
+	public function seleccion(){
+		
+		$sec = $this->input->post('sec');
+		$zona=$this->mantenimiento->zona();
+		$turno=$this->mantenimiento->turnos();
+		$grado=$this->mantenimiento->grado_academico();
+
+		if($sec=="dep"){
+			$departamentos=$this->ubigeo->departamentos();			
+			foreach($departamentos as $dep) {    	
+			 $departamento[] = array(
+		                'idDepa' => $dep->idDepa,
+		                'departamento' => $dep->departamento                    
+		            );
+		    }
+		 }else{
+			$departamento[]="";
+		 }
+		
+		if($sec=="pro"){
+			$coddep = $this->input->post('id_dep');
+			$provincias=$this->ubigeo->provincia($coddep);
+		    foreach($provincias as $pro) {    	
+		    	 $provincia[] = array(
+		                    'idProv' => $pro->idProv,
+		                    'provincia' => $pro->provincia                    
+		                );
+		         }
+	     }else{
+			$provincia[] ="";
+			}
+
+		if($sec=="dis"){
+			$codpro = $this->input->post('id_pro');
+			$distritos=$this->ubigeo->distrito($codpro);
+	    	foreach($distritos as $dis) {    	
+	    	 $distrito[] = array(
+	                    'idDist' => $dis->idDist,
+	                    'distrito' => $dis->distrito                    
+	                );
+	         }
+	     }else{
+	     	$distrito[] ="";
+	     }
+
+	    echo json_encode(array("departamento" => $departamento,"provincia"=>$provincia,"distrito"=>$distrito,"grado"=>$grado,"zona"=>$zona,"turno"=>$turno));
+	}
 	public function escuela(){
 		$data['dptos'] = $this->ubigeo->departamentos();
 		$this->load->view('content/mantenimiento/escuela',$data);

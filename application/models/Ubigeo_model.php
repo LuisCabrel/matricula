@@ -38,6 +38,30 @@ class Ubigeo_model extends CI_Model{
 		echo '<option value="">Seleccione...</option>'.$cadena;
 	}
 
+	public function provincia($coddep){
+		$this->db->select('*');
+		$this->db->from('ubprovincia');
+		$this->db->where('idDepa', $coddep);
+		$query = $this->db->get();
+		if($query->num_rows()>0){
+            return $query->result();
+        }else{
+            return false;
+        }
+	}
+
+	public function distrito($codpro){
+		$this->db->select('*');
+		$this->db->from('ubdistrito');
+		$this->db->where('idProv', $codpro);
+		$query = $this->db->get();
+		if($query->num_rows()>0){
+            return $query->result();
+        }else{
+            return false;
+        }
+	}
+
 	
 
 }

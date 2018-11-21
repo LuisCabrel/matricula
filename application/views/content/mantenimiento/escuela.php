@@ -63,21 +63,40 @@
                                     <div class="form-group col-md-3" id="7">
                                       <label class="control-label">Zona</label><span class="fs-arrow"></span>
                                       <select class="form-control" id="zona" name="zona">
-                                        <option value="">Seleccione...</option>
+                                        <!-- <option value="">Seleccione...</option>
                                         <option value="Urbana">Urbana</option>
-                                        <option value="Rural">Rural</option>
+                                        <option value="Rural">Rural</option> -->
                                       </select>
                                     </div>
                                     <div class="form-group col-md-3" id="8">
                                         <label class="control-label">Turnos</label>
-                                        <div class="form-group">
-                                            <select id="turnos" name="turnos"  class="form-control col-md-3 multi-select-dd" multiple="multiple" >                     
+                                        <input type="hidden" name="turnos_" id="turnos_" />
+                                        <div class="form-group" id="turnox">
+                                          
+
+                                             <!-- <div class="checkbox che1 checkbox-success checkbox-inline">
+                                              <input type="checkbox" class="styled" id="turnos" name="turnos[]" onclick="checkbox(this.form, 'turnos[]')" value="Dia">
+                                              <label for=""> Dia </label>
+                                          </div>
+                                          <div class="checkbox che1 checkbox-success checkbox-inline">
+                                              <input type="checkbox" class="styled" id="turnos"  name="turnos[]" onclick="checkbox(this.form, 'turnos[]')"value="Tarde">
+                                              <label for=""> Tarde </label>
+                                          </div>
+                                          <div class="checkbox che1 checkbox-success checkbox-inline">
+                                              <input type="checkbox" class="styled" id="turnos"  name="turnos[]" onclick="checkbox(this.form, 'turnos[]')"value="Noche">
+                                              <label for=""> Noche </label>
+                                          </div>  -->
+                                          <!-- <label class="checkbox-inline"> -->
+  
+                                          
+                                          
+                                            <!-- <select id="turnos" name="turnos"  class="form-control col-md-3" multiple="multiple" >                     
                                                 <option value="Inicial">Inicial</option>
-                                                <option value="Dia"> Día</option>      
+                                                <option value="Dia" checked> Día</option>      
                                                 <option value="Tarde">Tarde</option>
-                                                <option value="Noche"> Noche</option>
-                                            </select>
-                                            <input type="hidden" name="turnos_" id="turnos_" />   
+                                                <option value="Noche" checked> Noche</option>
+                                            </select> -->
+                                               
                                         </div>
                                     </div>
                                     <div class="form-group col-md-3" id="9">
@@ -87,10 +106,10 @@
                                     <div class="form-group col-md-3" id="10">
                                       <label class="control-label">Departamento</label><span class="fs-arrow"></span>
                                       <select class="form-control" id="departamento" name="departamento">
-                                        <option value="">Seleccione...</option>
+                                        <!-- <option value="">Seleccione...</option>
                                         <?php foreach ($dptos as $dpto) {?>
                                         <option value="<?php echo $dpto->idDepa ?>"><?php echo $dpto->departamento?></option>
-                                        <?php } ?>
+                                        <?php } ?> -->
                                       </select>
                                     </div>
                                     <div class="form-group col-md-3" id="11">

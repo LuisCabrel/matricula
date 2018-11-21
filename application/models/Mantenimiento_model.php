@@ -5,12 +5,30 @@ class Mantenimiento_model extends CI_Model{
         parent::__construct();
        
     }
+    public function turnos(){
+    	$this->db->select('*');
+    	$this->db->where('status',1);
+		$query=$this->db->get('turnos');
+		return $query->result();
+    }
 
+    public function zona(){
+    	$this->db->select('*');
+    	$this->db->where('status',1);
+		$query=$this->db->get('zona');
+		return $query->result();
+    }
+    public function grado_academico(){
+    	$this->db->select('*');
+    	$this->db->where('status',1);
+		$query=$this->db->get('grado');
+		return $query->result();
+    }
     public function guardar_escuela($datos){
     	$this->db->insert_batch('escuela',$datos);
     	return TRUE;
     }
-public function lista_escuela(){
+	public function lista_escuela(){
 		$this->db->select('a.*,(b.departamento)as nomDepa,(c.provincia)as nomProv,(d.distrito)as nomDist');
 		$this->db->from('escuela a');
 		$this->db->join('ubdepartamento b','b.idDepa=a.departamento','left');
@@ -24,7 +42,7 @@ public function lista_escuela(){
         }
 
 	}
-public function delete_school($id){
+	public function delete_school($id){
 	 	$this->db->where('id',$id);
         return $this->db->delete('escuela');
 	 }

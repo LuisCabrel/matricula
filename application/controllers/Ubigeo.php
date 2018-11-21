@@ -14,12 +14,14 @@ class Ubigeo extends CI_Controller {
 	}
 
 	public function dist(){
-		$codpro = $this->input->get('id');
+		$codpro = $this->input->get('id_pro');
 		$this->ubigeo->distritos($codpro);
 	}
 	public function prov(){
-		$coddep = $this->input->get('id');
+		$coddep = $this->input->get('id_dep');
 		$this->ubigeo->provincias($coddep);
 	}
+
+
 	
 }

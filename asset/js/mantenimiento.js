@@ -135,6 +135,10 @@ function edit_school(id){
     $("#telefonos").val($("#telefono"+id).text());
     $("#correo").val($("#email"+id).text());
     $("#creacion").val($("#creacion"+id).text());
+    $("#status").val("edit");
+
+    var res = foto.replace(path+"uploads/colegio/", "");
+    //$("#imgF1").val(res);
 
     var d,p,di;
     $.ajax({

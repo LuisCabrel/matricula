@@ -27,7 +27,7 @@
                     </ul>
                     <div class="panel-body">
                         <form id="formRegEsc" enctype="multipart/form-data">
-                         
+                         <input type="hidden" id="status" name="status" value="">
                             <div class="col-md-12">
                                 <div class="form-group col-md-3" id="1">
                                     <label class="control-label">Foto de Escuela</label>

@@ -107,7 +107,13 @@ class Mantenimiento extends CI_Controller {
 		$json = array();
 		/*$x=$this->input->post('turnos_');
 		var_dump($x);exit;*/
-		$this->form_validation->set_rules('imgF1','ImgF','required');
+		$id_escuela=$this->input->post('id_escuela');
+		$status=$this->input->post('status');
+		$img=$this->input->post('imgF1');
+
+		if($status!= "edit"){
+			$this->form_validation->set_rules('imgF1','ImgF','required');
+		}		
 		$this->form_validation->set_rules('nom_escuela','Nom_escuela','required');
 		$this->form_validation->set_rules('ruc','Ruc','required');
 		$this->form_validation->set_rules('direccion','Direccion','required');
@@ -137,6 +143,8 @@ class Mantenimiento extends CI_Controller {
 				'12'=>form_error('distrito','<span class="mt-3 has-error">','</span>')               
             );
 		}else{
+			if($status!="edit"){
+
 			/* insertando imagen en carpeta */
 			$config=[
 			"upload_path"=>"./uploads/colegio",
@@ -182,7 +190,44 @@ class Mantenimiento extends CI_Controller {
 			$json=array(			 		
 			 		"msg"=>$msg,
 			 		"resp"=>$resp,
-			 	);				
+			 	);
+
+			/* fin de insert de imagen */
+			}else{
+				/*modifica*/
+				if($img==""){
+					$datos[] = array(
+				        'nombre' => $this->input->post('nom_escuela'),
+				        'ruc' => $this->input->post('ruc'),
+				        'direccion' => $this->input->post('direccion'),
+				        'telefono' => $this->input->post('telefonos'),
+				        'email' => $this->input->post('correo'),
+				        'zona' => $this->input->post('zona'),
+				        'turnos' => $this->input->post('turnos_'),
+				        'creacion' => $this->input->post('creacion'),
+				        'departamento' => $this->input->post('departamento'),
+				        'provincia' => $this->input->post('provincia'),
+				        'distrito' => $this->input->post('distrito'),				        
+					);
+
+				}else{
+					$datos[] = array(
+				        'nombre' => $this->input->post('nom_escuela'),
+				        'ruc' => $this->input->post('ruc'),
+				        'direccion' => $this->input->post('direccion'),
+				        'telefono' => $this->input->post('telefonos'),
+				        'email' => $this->input->post('correo'),
+				        'zona' => $this->input->post('zona'),
+				        'turnos' => $this->input->post('turnos_'),
+				        'creacion' => $this->input->post('creacion'),
+				        'departamento' => $this->input->post('departamento'),
+				        'provincia' => $this->input->post('provincia'),
+				        'distrito' => $this->input->post('distrito'),
+				        'foto' => $data['upload_data']['file_name'],
+					);
+
+				}
+			}				
 		}
 		echo json_encode($json);	
 	}

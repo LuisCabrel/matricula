@@ -46,6 +46,17 @@ class Mantenimiento_model extends CI_Model{
 	 	$this->db->where('id',$id);
         return $this->db->delete('escuela');
 	 }
+	public function modifica_school($datos){
+		$this->db->update_batch('escuela', $datos,'id');
+        return true;
+	}
+	public function capturarImagen($idlogo){
+		$this->db->select("foto");
+		$this->db->from("escuela");
+		$this->db->where("id",$idlogo);
+		$query = $this->db->get();
+		return $query->row();
+	}
 /*public function lista_escuela(){
 		$this->db->select('a.*,(b.departamento)as nomDepa,(c.provincia)as nomProv,(d.distrito)as nomDist');
 		$this->db->from('escuela a');

@@ -12,6 +12,7 @@ var btn_delete1='<button type="button" class="btn btn-danger col-md-6"onclick="'
 var btn_delete2='" style="margin:2px;">Eliminar</button>';
 var ico_elimina='<span class="glyphicon glyphicon-trash" aria-hidden="true" style="font-size:30px;align-content: center;color: #ac2925"></span>';
 var ico_ok='<span class="glyphicon glyphicon-ok-circle" aria-hidden="true" style="font-size:30px;align-content: center;color: #4cae4c"></span>';
+var ico_warning='<span class="glyphicon glyphicon-warning-sign" aria-hidden="true" style="font-size:30px;align-content: center;color: #ec971f"></span>';
 var msg_delete='Desea Eliminar Datos';
 var msg_eliminando='Elimininando Datos';
 var loading='<div align="center"><img src="'+path+'asset/img/loaders/loading.gif" width="40px;" height="40px;" /></div> ';

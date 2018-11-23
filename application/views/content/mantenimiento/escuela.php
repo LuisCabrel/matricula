@@ -26,7 +26,8 @@
                         <li><a href="#" class="panel-remove"><span class="fa fa-times"></span></a></li>
                     </ul>
                     <div class="panel-body">
-                        <form id="formRegEsc" enctype="multipart/form-data">
+                        <form id="formRegEsc" enctype="multipart/form-data" method="POST">
+                          <input type="hidden" id="id_escuela" name="id_escuela" value="">
                          <input type="hidden" id="status" name="status" value="">
                             <div class="col-md-12">
                                 <div class="form-group col-md-3" id="1">
@@ -124,7 +125,7 @@
                                     </div>                                
                             </div> 
                             <div class="form-group col-xs-12 col-md-3 formBTn">
-                              <button class="btn btn-info col-xs-12" id="save_escuela">Guadar</button>  
+                              <button class="btn btn-info col-xs-12" id="save_escuela">Guardar</button>  
                             </div>
                           <br>            
                         </form>

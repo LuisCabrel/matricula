@@ -83,8 +83,8 @@
                     <li class="xn-openable">
                         <a href="#"><span class="fa fa-cog"></span> <span class="xn-text">Mantenimiento</span></a>
                         <ul>
-                            <li class="li"><a href="<?php echo base_url();?>Mantenimiento/escuela"><span class="fa fa-university"></span> Registrar Escuela</a></li>
-                        </ul>
+                            <li class="li"><a href="<?php echo base_url();?>mantenimiento/escuela"><span class="fa fa-university"></span> Registrar Escuela</a></li>
+                        </ul>s
                     </li> 
                     <li></li>                                   
                 </ul>

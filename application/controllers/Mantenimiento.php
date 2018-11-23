@@ -105,6 +105,8 @@ class Mantenimiento extends CI_Controller {
 
 	public function registrar_escuela(){
 		$json = array();
+		$randon=date("Ymd_His");
+		//var_dump($randon);EXIT;
 		/*$x=$this->input->post('turnos_');
 		var_dump($x);exit;*/
 		$id_escuela=$this->input->post('id_escuela');
@@ -143,16 +145,18 @@ class Mantenimiento extends CI_Controller {
 				'12'=>form_error('distrito','<span class="mt-3 has-error">','</span>')               
             );
 		}else{
-			if($status!="edit"){
-
-			/* insertando imagen en carpeta */
 			$config=[
 			"upload_path"=>"./uploads/colegio",
 			"allowed_types"=>"png|jpeg|jpg|ico",
+			"file_name"=>$randon,
 			"max_size" => 1024,
 			"max_width"  => 1024,
 			"max_height"  => 768
-			];			
+			];
+			if($status!="edit"){
+
+			/* insertando imagen en carpeta */
+						
                 $this->load->library('upload', $config);                
                 
                 if($this->upload->do_upload('foto1')){
@@ -197,6 +201,7 @@ class Mantenimiento extends CI_Controller {
 				/*modifica*/
 				if($img==""){
 					$datos[] = array(
+						'id' => $id_escuela,
 				        'nombre' => $this->input->post('nom_escuela'),
 				        'ruc' => $this->input->post('ruc'),
 				        'direccion' => $this->input->post('direccion'),
@@ -209,9 +214,27 @@ class Mantenimiento extends CI_Controller {
 				        'provincia' => $this->input->post('provincia'),
 				        'distrito' => $this->input->post('distrito'),				        
 					);
+					$update=$this->mantenimiento->modifica_school($datos);
+                    if ($update=TRUE) {
+                    	$msg=1;
+					 	$resp="Se Modificó Datos de la empresa";						 	
+					}else{
+						$msg=2;
+					 	$resp="Error al Modificar Datos";					 	
+					}
+					$json=array(			 		
+				 		"msg"=>$msg,
+				 		"resp"=>$resp,
+				 	);
 
 				}else{
-					$datos[] = array(
+					$this->load->library("upload",$config);
+					if($this->upload->do_upload('foto1')){
+						$buscarImg = $this->mantenimiento->capturarImagen($id_escuela);
+						unlink("./uploads/colegio/".$buscarImg->foto);
+						$data=array("upload_data"=>$this->upload->data());
+						$datos[] = array(
+						'id' => $id_escuela,
 				        'nombre' => $this->input->post('nom_escuela'),
 				        'ruc' => $this->input->post('ruc'),
 				        'direccion' => $this->input->post('direccion'),
@@ -225,6 +248,25 @@ class Mantenimiento extends CI_Controller {
 				        'distrito' => $this->input->post('distrito'),
 				        'foto' => $data['upload_data']['file_name'],
 					);
+						$result= $this->mantenimiento->modifica_school($datos);
+						 if ($update=TRUE) {
+                    	$msg=1;
+					 	$resp="Se Modificó Datos de la empresa";						 	
+						}else{
+							$msg=2;
+						 	$resp="Error al Modificar Datos";					 	
+						}
+						$json=array(			 		
+					 		"msg"=>$msg,
+					 		"resp"=>$resp,
+					 	);
+					}else{
+						$json=array(			 		
+					 		"msg"=>3,
+					 		"resp"=>$this->upload->display_errors(),
+					 	);
+					}
+					
 
 				}
 			}				

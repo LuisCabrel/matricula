@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	tbl_escuela();
 });
-// document.write("<script type='text/javascript' src='"+path+"asset/js/funciones_generakes.js'></script>");
+// document.write("<script type='text/javascript' src='"+path+"asset/js/funciones_generales.js'></script>");
 $('#save_escuela').click(function(e){
 	 e.preventDefault();
 	 var form= $("#formRegEsc").serialize();
@@ -12,7 +12,6 @@ $('#save_escuela').click(function(e){
         url: path+"mantenimiento/registrar_escuela", 
         data:formData,
         dataType: "json",
-        data: formData,
         crossDomain:true,
 		cache:false,
 		contentType:false,
@@ -36,9 +35,25 @@ $('#save_escuela').click(function(e){
         			document.getElementById('imgSalida1').src = "#";
         			$("#imgF1").val("");
         			$("#turnos")[0].selectedIndex = -1;
-        			alert(data['resp']);
+                    cargarDepartamentos();
+                    $("#provincia")[0].selectedIndex = -1;
+                    $("#distrito")[0].selectedIndex = -1;
+        			//alert(data['resp']);
+
+                    $("#loading").hide();
+                    $("#ico").html(ico_ok);
+                    $("#ico").show();
+                    $("#msg1").html(data['resp']);
+                    $("#btn_modal").html(btn_cerrar);
+                    $("#alertas").modal('show');
         		}else{
-        			alert(data['resp']);
+        			//alert(data['resp']);
+                    $("#loading").hide();
+                    $("#ico").html(ico_warning);
+                    $("#ico").show();
+                    $("#msg1").html(data['resp']);
+                    $("#btn_modal").html(btn_cerrar);
+                    $("#alertas").modal('show');
         		}
         		
         	}
@@ -62,7 +77,7 @@ function tbl_escuela(){
 	    	for(var x=0;x<resp.datos.length;x++){
 	    		 html+='<tr>'+
 		                '<td><div class="row"><center>'+
-        	   				'<i class="fa fa-pencil-square btn-tabla-edit"  name="" id="edit_sch" onclick="edit_school('+resp.datos[x]['id']+')"></i>'+
+        	   				'<i class="fa fa-pencil-square btn-tabla-edit" onclick="edit_school('+resp.datos[x]['id']+')"></i>'+
         	   				'<i class="fa fa-times-rectangle btn-tabla-delete" onclick="msgDelete('+resp.datos[x]['id']+')"></i></center></div>'+
         	   			'</td>'+
 		                '<td><span id="foto'+resp.datos[x]['id']+'"><img id="img'+resp.datos[x]['id']+'" width="30" height="30" src="'+path+'uploads/colegio/'+resp.datos[x]['foto']+'" /></span></td>'+
@@ -118,7 +133,7 @@ function del_school(id) {
 }
 
 function edit_school(id){
-    console.log(id);
+    //console.log(id);
 
     //var foto=$("#foto"+id).getAttribute("src");
     var foto=document.getElementById('img'+id).src;
@@ -136,6 +151,7 @@ function edit_school(id){
     $("#correo").val($("#email"+id).text());
     $("#creacion").val($("#creacion"+id).text());
     $("#status").val("edit");
+    $("#id_escuela").val(id);
 
     var res = foto.replace(path+"uploads/colegio/", "");
     //$("#imgF1").val(res);
@@ -232,13 +248,73 @@ function edit_school(id){
                 $("#turnos_").val(turnos);            
              }
         });
-    $('.formBTn').html('<div class="col-xs-6"><button class="btn btn-default col-xs-12" onclick="limpiarformRegEsc()">Cancelar</button></div><div class="col-xs-6"><button class="btn btn-warning col-xs-12" id="mod_escuela">Modificar</button></div>');
+    $('.formBTn').html('<div class="col-xs-6"><button class="btn btn-default col-xs-12" onclick="limpiarformRegEsc()">Cancelar</button></div><div class="col-xs-6"><button class="btn btn-warning col-xs-12" id="save_escuelax">Modificar</button></div>');
 
 }
 
 function limpiarformRegEsc(){
     $("#formRegEsc")[0].reset();
 }
+
+$('#save_escuelax').click(function(e){
+     e.preventDefault();
+     var form= $("#formRegEsc").serialize();
+     var formData=new FormData($("#formRegEsc")[0]);
+     //console.log(form);
+     $.ajax({
+        type: "POST",
+        url: path+"mantenimiento/registrar_escuela", 
+        data:formData,
+        dataType: "json",
+        crossDomain:true,
+        cache:false,
+        contentType:false,
+        processData:false, 
+        success: function(data) {
+            
+            //if(data['msg']===false){
+            if(data['msg']===false){
+                $.each(data, function(key, value) {
+                    if(value!=""){
+                        $('#'+key).addClass('has-error'); 
+                    }else{
+                        $('#'+key).removeClass('has-error').addClass('');
+                    } 
+                });
+            }else{
+                if(data['msg']===1){
+                    tbl_escuela();
+                    $("#formRegEsc")[0].reset();
+                    $("#emailOK").html("");
+                    document.getElementById('imgSalida1').src = "#";
+                    $("#imgF1").val("");
+                    $("#turnos")[0].selectedIndex = -1;
+                    cargarDepartamentos();
+                    $("#provincia")[0].selectedIndex = -1;
+                    $("#distrito")[0].selectedIndex = -1;
+                    //alert(data['resp']);
+
+                    $("#loading").hide();
+                    $("#ico").html(ico_ok);
+                    $("#ico").show();
+                    $("#msg1").html(data['resp']);
+                    $("#btn_modal").html(btn_cerrar);
+                    $("#alertas").modal('show');
+                }else{
+                    //alert(data['resp']);
+                    $("#loading").hide();
+                    $("#ico").html(ico_warning);
+                    $("#ico").show();
+                    $("#msg1").html(data['resp']);
+                    $("#btn_modal").html(btn_cerrar);
+                    $("#alertas").modal('show');
+                }
+                
+            }
+            
+        }
+     });
+});
 // $("#cancelar_escuela").click(function(e){
 //     e.preventDefault();
 //     console.log(e);

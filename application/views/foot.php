@@ -14,6 +14,7 @@
         <!-- START PLUGINS -->
       
         <script type="text/javascript" src="<?php echo base_url(); ?>asset/js/plugins/bootstrap/bootstrap.min.js"></script>
+        <script type="text/javascript" src="<?php echo base_url(); ?>asset/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url(); ?>asset/js/img.js"></script>   
         <script type="text/javascript" src="<?php echo base_url(); ?>asset/js/funciones_generales.js"></script>  
         <script type="text/javascript" src="<?php echo base_url(); ?>bootstrap/js/fSelect.js"></script>

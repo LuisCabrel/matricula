@@ -291,6 +291,9 @@ class Mantenimiento extends CI_Controller {
          echo json_encode($data);
 	}
 
+public function email(){
+	$this->load->view('content/mantenimiento/email');	
+}
 
 
 

@@ -255,8 +255,8 @@ function edit_school(id){
 function limpiarformRegEsc(){
     $("#formRegEsc")[0].reset();
 }
-
-$('#save_escuelax').click(function(e){
+$( document ).on( "click", "#save_escuelax", function(e) {
+//$('#save_escuelax').click(function(e){
      e.preventDefault();
      var form= $("#formRegEsc").serialize();
      var formData=new FormData($("#formRegEsc")[0]);

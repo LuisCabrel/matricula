@@ -41,7 +41,7 @@
                                             </div>
                                         </div> 
                                         <span id="btnEspec">
-                                            <button type="button" class="btn btn-primary" id="btnsaveEspec" onclick="guardarConfiguracion(this.form)"><i class="fa fa-save"></i></button>
+                                            <button type="button" class="btn btn-primary" id="btnsaveEspec" onclick="guardarConfiguracion('formEspec','especialidad','save_especialidad','tbl_espec()')"><i class="fa fa-save"></i></button>
                                         <!-- <button type="submit" class="btn btn-danger"><i class="fa fa-save"></i></button> -->
                                         </span>                                   
                                         

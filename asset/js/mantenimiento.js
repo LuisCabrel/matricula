@@ -321,7 +321,7 @@ function tbl_espec(){
     })
 }
 
-function guardarConfiguracion(value,form,destUrl,tabla){
+function guardarConfiguracion(form,input,destUrl,tabla){
 /*$(document).on( "click", "#btnsaveEspec", function(e) {
     e.preventDefault();*/
     console.log(value);

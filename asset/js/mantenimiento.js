@@ -1,12 +1,13 @@
 $(document).ready(function() {
 	tbl_escuela();
+    tbl_espec();    
 });
 // document.write("<script type='text/javascript' src='"+path+"asset/js/funciones_generales.js'></script>");
-$('#save_escuela').click(function(e){
+//$('#save_escuela').click(function(e){
+$(document).on('click','#save_escuela',function(e){
 	 e.preventDefault();
 	 var form= $("#formRegEsc").serialize();
 	 var formData=new FormData($("#formRegEsc")[0]);
-	 //console.log(form);
 	 $.ajax({
 	 	type: "POST",
         url: path+"mantenimiento/registrar_escuela", 
@@ -18,7 +19,6 @@ $('#save_escuela').click(function(e){
 		processData:false, 
         success: function(data) {
         	
-        	//if(data['msg']===false){
         	if(data['msg']===false){
         		$.each(data, function(key, value) {
 		            if(value!=""){
@@ -34,10 +34,12 @@ $('#save_escuela').click(function(e){
         			$("#emailOK").html("");
         			document.getElementById('imgSalida1').src = "#";
         			$("#imgF1").val("");
-        			$("#turnos")[0].selectedIndex = -1;
+        			//$("#turnos")[0].selectedIndex = -1;
+                    $('input:checkbox').each(function() { this.checked = false; });
                     cargarDepartamentos();
                     $("#provincia")[0].selectedIndex = -1;
                     $("#distrito")[0].selectedIndex = -1;
+                     $('.formBTn').html('<button class="btn btn-info col-xs-12" id="save_escuela">Guadar</button>');
         			//alert(data['resp']);
 
                     $("#loading").hide();
@@ -73,12 +75,15 @@ function tbl_escuela(){
 		dataType: "json",
 	    success: function(resp){
 	    	var html="";
+            var funcion="'del_school'";
+            var destinoURL="'delete_school'";
+            var tabla="'tbl_escuela()'";
 	    	var item=resp.datos.length;
 	    	for(var x=0;x<resp.datos.length;x++){
 	    		 html+='<tr>'+
 		                '<td><div class="row"><center>'+
         	   				'<i class="fa fa-pencil-square btn-tabla-edit" onclick="edit_school('+resp.datos[x]['id']+')"></i>'+
-        	   				'<i class="fa fa-times-rectangle btn-tabla-delete" onclick="msgDelete('+resp.datos[x]['id']+')"></i></center></div>'+
+        	   				'<i class="fa fa-times-rectangle btn-tabla-delete" onclick="msgDelete('+resp.datos[x]['id']+","+funcion+","+destinoURL+","+tabla+')"></i></center></div>'+
         	   			'</td>'+
 		                '<td><span id="foto'+resp.datos[x]['id']+'"><img id="img'+resp.datos[x]['id']+'" width="30" height="30" src="'+path+'uploads/colegio/'+resp.datos[x]['foto']+'" /></span></td>'+
 		                '<td><span id="nombre'+resp.datos[x]['id']+'">'+resp.datos[x]['nombre']+'</span></td>'+
@@ -99,18 +104,22 @@ function tbl_escuela(){
 	})
 }
 
-function msgDelete(id){
-	$("#btn_modal").html(btn_delete1+"del_school("+id+")"+btn_delete2+" "+btn_cerrar);
+//function msgDelete(id){
+function msgDelete(id,funcion,destinoURL,tabla){
+	//$("#btn_modal").html(btn_delete1+"del_school("+id+")"+btn_delete2+" "+btn_cerrar);
+    $("#btn_modal").html(btn_delete1+funcion+"("+id+",'"+destinoURL+"','"+tabla+"')"+btn_delete2+" "+btn_cerrar);
 	$("#ico").html(ico_elimina);
 	 $("#loading").hide();
 	$("#msg1").html(msg_delete);
 	$("#alertas").modal('show');
 }
 
-function del_school(id) {
+//function del_school(id) {
+function del_school(id,destinoURL,tabla) {
 	var string ="id="+id;	
 	$.ajax({
-		url:'delete_school',
+		//url:'delete_school',
+        url:destinoURL,
 		type:'POST',
 		data:string,
 		beforeSend: function () {
@@ -121,7 +130,8 @@ function del_school(id) {
 		        },
 		success: function(resp){
         	var x = JSON.parse(resp);
-                tbl_escuela();
+                //tbl_escuela();
+                eval(tabla);
                 $("#loading").hide();
         		$("#ico").html(ico_ok);
         		$("#ico").show();
@@ -229,14 +239,12 @@ function edit_school(id){
                t3="Noche";
                if(nt[0]===t1 || nt[1]===t1 || nt[2]===t1){var nombreT1=t1;}else{var nombreT1="";}
                if(nt[0]===t2 || nt[1]===t2 || nt[2]===t2){var nombreT2=t2;}else{var nombreT2="";}
-               if(nt[0]===t1 || nt[1]===t2 || nt[2]===t3){var nombreT3=t3;}else{var nombreT3="";}
+               if(nt[0]===t3 || nt[1]===t3 || nt[2]===t3){var nombreT3=t3;}else{var nombreT3="";}
                var tx=[];
                tx[0]=""+nombreT1+"";
                tx[1]=""+nombreT2+"";
                tx[2]=""+nombreT3+"";
                
-                console.log(" t: "+tx);
-                console.log(" t: "+tx[0]);
                 var alrt="checkbox(this.form, 'turnos[]')";
                 for(var x=0;x<resp.turno.length;x++){              
                     if (tx[x]==resp.turno[x]['turnos']) {$key="checked";}else{$key="";}             
@@ -248,7 +256,7 @@ function edit_school(id){
                 $("#turnos_").val(turnos);            
              }
         });
-    $('.formBTn').html('<div class="col-xs-6"><button class="btn btn-default col-xs-12" onclick="limpiarformRegEsc()">Cancelar</button></div><div class="col-xs-6"><button class="btn btn-warning col-xs-12" id="save_escuelax">Modificar</button></div>');
+    $('.formBTn').html('<div class="col-xs-6"><button class="btn btn-default col-xs-12" id="cancelar_escuela">Cancelar</button></div><div class="col-xs-6"><button class="btn btn-warning col-xs-12" id="save_escuela">Modificar</button></div>');
 
 }
 
@@ -256,142 +264,106 @@ function limpiarformRegEsc(){
     $("#formRegEsc")[0].reset();
 }
 
-$('#save_escuelax').click(function(e){
-     e.preventDefault();
-     var form= $("#formRegEsc").serialize();
-     var formData=new FormData($("#formRegEsc")[0]);
-     //console.log(form);
-     $.ajax({
-        type: "POST",
-        url: path+"mantenimiento/registrar_escuela", 
-        data:formData,
-        dataType: "json",
-        crossDomain:true,
-        cache:false,
-        contentType:false,
-        processData:false, 
-        success: function(data) {
-            
-            //if(data['msg']===false){
-            if(data['msg']===false){
-                $.each(data, function(key, value) {
-                    if(value!=""){
-                        $('#'+key).addClass('has-error'); 
-                    }else{
-                        $('#'+key).removeClass('has-error').addClass('');
-                    } 
-                });
-            }else{
-                if(data['msg']===1){
-                    tbl_escuela();
-                    $("#formRegEsc")[0].reset();
-                    $("#emailOK").html("");
-                    document.getElementById('imgSalida1').src = "#";
-                    $("#imgF1").val("");
-                    $("#turnos")[0].selectedIndex = -1;
-                    cargarDepartamentos();
-                    $("#provincia")[0].selectedIndex = -1;
-                    $("#distrito")[0].selectedIndex = -1;
-                    //alert(data['resp']);
+$(document).on('click','#cancelar_escuela',function(e){
+//$("#cancelar_escuela").click(function(e){
+    e.preventDefault();
+    $("#formRegEsc")[0].reset();
+     $("#status").val("");
+    $("#id_escuela").val("");
+    document.getElementById('imgSalida1').src ="";
+    $('input:checkbox').each(function() { this.checked = false; });
+    $("#nom_escuela").val("");
+    $("#ruc").val("");
+    $("#direccion").val("");
+    $("#telefonos").val("");
+    $("#correo").val("");
+    $("#creacion").val("");
+    cargarZona();
+    cargarTurno();
+    cargarDepartamentos();
+    $("#provincia")[0].selectedIndex = -1;
+    $("#distrito")[0].selectedIndex = -1;
+    
 
+
+    $('.formBTn').html('<button class="btn btn-info col-xs-12" id="save_escuela">Guadar</button>');
+});
+
+function tbl_espec(){
+    $.ajax({
+        url: 'lista_especialidad',
+        dataType: "json",
+        success: function(resp){
+            //console.log(resp.especialidad[0]['id']);
+            var html="";
+            // if(resp.resp==true){
+                for(var x=0;x<resp.especialidad.length;x++){                
+                
+                 html+='<tr>'+
+                        '<td><span id="nombre'+resp.especialidad[x]['id']+'">'+resp.especialidad[x]['nombre']+'</span></td>'+
+                        '<td><div class="row"><center>'+
+                            '<i class="fa fa-pencil-square btn-tabla-edit" onclick="edit_especialidad('+resp.especialidad[x]['id']+')"></i>'+
+                            '<i class="fa fa-times-rectangle btn-tabla-delete" onclick="msgDelete('+resp.especialidad[x]['id']+')"></i></center></div>'+
+                        '</td>'+                       
+                        '</tr>';
+                
+                }
+                $("#tblEspecialidad").html(html);
+            // }
+            
+                     
+        }
+    })
+}
+
+function guardarConfiguracion(value,form,destUrl,tabla){
+/*$(document).on( "click", "#btnsaveEspec", function(e) {
+    e.preventDefault();*/
+    console.log(value);
+    console.log(value.id);
+    console.log(value.input.value);
+    /*if($('#especialidad').val()==""){
+        $('#formEspec').addClass('has-error'); 
+    }
+    var string = $("#formEspec").serialize(); 
+    $.ajax({
+        url:'save_especialidad',
+        type:'POST',
+        data:string,
+        beforeSend:function(){
+            $(".loading_bg").html(loading);
+            $("#loading").show();
+            $("#alertas").show();
+        },
+        success: function(resp){
+            var x = JSON.parse(resp);
+                 if(x.resp=='true'){
+                    $("#formEspec")[0].reset();
+                    $(".loading_bg").html("");
                     $("#loading").hide();
                     $("#ico").html(ico_ok);
                     $("#ico").show();
-                    $("#msg1").html(data['resp']);
+                    $("#msg1").html(x.msg);
                     $("#btn_modal").html(btn_cerrar);
                     $("#alertas").modal('show');
-                }else{
-                    //alert(data['resp']);
+                    tbl_espec();
+                 }else{
+                    $("#formEspec")[0].reset();
+                    $(".loading_bg").html("");
                     $("#loading").hide();
                     $("#ico").html(ico_warning);
                     $("#ico").show();
-                    $("#msg1").html(data['resp']);
+                    $("#msg1").html(x.msg);
                     $("#btn_modal").html(btn_cerrar);
                     $("#alertas").modal('show');
-                }
-                
-            }
-            
+                 }
         }
-     });
-});
-// $("#cancelar_escuela").click(function(e){
-//     e.preventDefault();
-//     console.log(e);
-//     //$("#formRegEsc")[0].reset();
-//     // document.getElementById('imgSalida1').src ="";
-//     // $("#nom_escuela").val("");
-//     // $("#ruc").val("");
-//     // $("#direccion").val("");
-//     // $("#telefonos").val("");
-//     // $("#correo").val("");
-//     // $("#creacion").val("");
-//     // cargarZona();
-//     // cargarTurno();
-//     // cargarDepartamentos();
+    })  */
 
-
-//     //$('.formBTn').html('<button class="btn btn-info col-xs-12" id="save_escuela">Guadar</button>');
 // });
-//$("#edit_sch").click(function() {
-	// $(this).parents("tr").find("td").each(function(){
- //                valores+=$(this).html()+"\n";
- //            });
- 
- //            alert(valores);
-	// alert();
-	// // var $row = $(this);
- //    var $row = $(this).closest("tr");    // Find the row
- //    var $text = $row.find("#distrito").text(); // Find the text
-    
- //    // Let's test it out
- //    // console.log(row);
- //    console.log($text);
-//});
+}
 
-// function tbl_escuelaxx() {	
-// 	options = function (data, type, row) {
-//         return '<div class="col-sm-12">'+
-//         	   '<div class="col-sm-6"><button type="button" class="btn btn-danger btn-xs" data-toggle="button" onclick="msgP('+data+')">'+
-//         	   '<span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></div>'+
-//         	   '<div class="col-sm-6"><button type="button" class="btn btn-warning btn-xs" data-toggle="button" id="upd_pac">'+
-//         	   '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button></div>'+
-//         	   '</div>';       
-//     };
-//     tablaPaciente = $('#tbl_escuela').on('preXhr.dt', function ( e, settings, data ) {       
-//             $('#tbl_escuelawrapper').prepend('<div class="span12" style="min-height: 0px;"></div>');
-//             $('#tbl_escuela_wrapper').prepend($('.dt-buttons'));
-//         }).DataTable({
-//         "bDestroy": true,
-//         "ajax": {
-//             "type": "POST",
-//             "url": path+"mantenimiento/lista_escuela", 
-//             "dataType": "json",           
-//             "data": ""           
-//         },
-//         "sAjaxDataProp": "",
-//         "language": {
-//             "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/English.json"
-//          },
-//         "columns": [
-//         	{"data": "id", "title": "<center><span class='glyphicon glyphicon-cog' aria-hidden='true'></span></center>","render":options},
-//            	{"data": "foto", "title": "FOTO"},
-//             {"data": "nombre", "title": "NOMBRE"},
-//             {"data": "ruc", "title": "RUC"},            
-//             {"data": "direccion", "title": "DIRECCION"},
-//             {"data": "telefono", "title": "TELEFONO"},
-//             {"data": "email", "title": "EMAIL"},
-//             {"data": "zona", "title": "ZONA"},
-//             {"data": "turnos", "title": "TURNOS"},
-//             {"data": "creacion", "title": "CREACION"},
-//             {"data": "nomDepa", "title": "DEPARTAMENTO"},
-//             {"data": "nomProv", "title": "PROVINCIA"},  
-//             {"data": "nomDist", "title": "DISTRITO"}         
-//         ],
-//         "scrollX": true,
-//         "iDisplayLength": 5,        
-//     });
-// }
+
 
 
 // $('#tbl_escuela').on('click','td',function( e, settings, data ){

@@ -1945,9 +1945,9 @@ ul.panel-controls > li > .dropdown-menu:before {
   padding: 4px 15px;
   line-height: 20px;
   font-weight: 400;
-  -moz-border-radius: 0px;
-  -webkit-border-radius: 0px;
-  border-radius: 0px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
   -webkit-transition: all 200ms ease;
   -moz-transition: all 200ms ease;
   -ms-transition: all 200ms ease;

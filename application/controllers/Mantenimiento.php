@@ -138,7 +138,7 @@ class Mantenimiento extends CI_Controller {
 				'5'=>form_error('telefonos','<span class="mt-3 has-error">','</span>'),
 				'6'=>form_error('correo','<span class="mt-3 has-error">','</span>'),
 				'7'=>form_error('zona','<span class="mt-3 has-error">','</span>'),
-				'8'=>form_error('turnos','<span class="mt-3 has-error">','</span>'),
+				'8'=>form_error('turnos_','<span class="mt-3 has-error">','</span>'),
 				'9'=>form_error('creacion','<span class="mt-3 has-error">','</span>'),
 				'10'=>form_error('departamento','<span class="mt-3 has-error">','</span>'),
 				'11'=>form_error('provincia','<span class="mt-3 has-error">','</span>'),
@@ -289,6 +289,51 @@ class Mantenimiento extends CI_Controller {
             ];
          }
          echo json_encode($data);
+	}
+	public function email(){
+		$this->load->view('content/mantenimiento/email');	
+	}
+
+	public function select(){
+		$this->load->view('content/mantenimiento/configuracion');
+	}
+
+	public function lista_especialidad(){
+		
+		$especialidad = $this->mantenimiento->listaEspec();
+		if ($especialidad!=false) {
+            $data=[
+                "resp"=>"true",
+                "especialidad"=>$especialidad,
+            ];
+         }else{
+            $data=[
+                "resp"=>"false",
+                "msg"=>"No se encontro información en la base de datos",
+            ];
+         }
+         echo json_encode($data);
+	
+	}
+	public function save_especialidad(){
+		$nombre=$this->input->post('especialidad');
+		$datos = array(
+			'nombre' => $nombre,
+		);
+		$result= $this->mantenimiento->guardar_especialidad($datos);
+
+		if ($result=true) {
+		 	$data=[
+		 		"resp"=>"true",
+		 		"msg"=>"Se registro Especialidad",
+		 	];
+		 }else{
+		 	$data=[
+		 		"resp"=>"false",
+		 		"msg"=>"Error al Registrar Especialidad",
+		 	];
+		 }
+		 echo json_encode($data);
 	}
 
 

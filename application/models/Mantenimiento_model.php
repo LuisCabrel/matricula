@@ -57,6 +57,20 @@ class Mantenimiento_model extends CI_Model{
 		$query = $this->db->get();
 		return $query->row();
 	}
+	public function listaEspec(){
+		$this->db->select("*");
+		$this->db->from("especialidad");		
+		$query = $this->db->get();
+		if($query->num_rows()>0){
+            return $query->result();
+        }else{
+            return false;
+        }
+	}
+	public function guardar_especialidad($data){
+	 	$this->db->insert('especialidad', $data);
+        return true;
+	 }
 /*public function lista_escuela(){
 		$this->db->select('a.*,(b.departamento)as nomDepa,(c.provincia)as nomProv,(d.distrito)as nomDist');
 		$this->db->from('escuela a');

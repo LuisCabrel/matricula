@@ -1,6 +1,7 @@
 $(document).ready(function() {
 	tbl_escuela();
     tbl_espec();    
+
 });
 // document.write("<script type='text/javascript' src='"+path+"asset/js/funciones_generales.js'></script>");
 //$('#save_escuela').click(function(e){
@@ -104,6 +105,7 @@ function tbl_escuela(){
 	})
 }
 
+
 //function msgDelete(id){
 function msgDelete(id,funcion,destinoURL,tabla){
 	//$("#btn_modal").html(btn_delete1+"del_school("+id+")"+btn_delete2+" "+btn_cerrar);
@@ -114,9 +116,12 @@ function msgDelete(id,funcion,destinoURL,tabla){
 	$("#alertas").modal('show');
 }
 
+
 //function del_school(id) {
 function del_school(id,destinoURL,tabla) {
-	var string ="id="+id;	
+	var string ="id="+id;
+    console.log(tabla);	
+
 	$.ajax({
 		//url:'delete_school',
         url:destinoURL,
@@ -264,6 +269,7 @@ function limpiarformRegEsc(){
     $("#formRegEsc")[0].reset();
 }
 
+
 $(document).on('click','#cancelar_escuela',function(e){
 //$("#cancelar_escuela").click(function(e){
     e.preventDefault();
@@ -305,8 +311,7 @@ function tbl_espec(){
                             '<i class="fa fa-pencil-square btn-tabla-edit" onclick="edit_especialidad('+resp.especialidad[x]['id']+')"></i>'+
                             '<i class="fa fa-times-rectangle btn-tabla-delete" onclick="msgDelete('+resp.especialidad[x]['id']+')"></i></center></div>'+
                         '</td>'+                       
-                        '</tr>';
-                
+                        '</tr>';                
                 }
                 $("#tblEspecialidad").html(html);
             // }

@@ -39,7 +39,7 @@ CREATE TABLE `escuela` (
   `distrito` varchar(50) DEFAULT NULL,
   `foto` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -48,8 +48,81 @@ CREATE TABLE `escuela` (
 
 LOCK TABLES `escuela` WRITE;
 /*!40000 ALTER TABLE `escuela` DISABLE KEYS */;
-INSERT INTO `escuela` VALUES (1,'nombre de colegio',2011201735,'av mi direccion',2325637,'qawsde@gmail.com','Urbana','Inicial','2018-11-10','15','130','1305','tarjeta.png'),(7,'xxxxxxxxx',2147483647,'acaadasasasas',345456767,'123@gmail.com','Urbana','Inicial,Dia,Tarde,Noche','2018-10-01','19','150','1516','warning1.png'),(8,'dcddcdccdc',2147483647,'ccccccccccc',222222222,'qqq@gmail.com','Urbana','Día,Noche','2018-11-16','15','134','1371','pen.png'),(9,'12344',2147483647,'ccccccccccc',999999999,'9999@gmail.com','Urbana','Día,Tarde,Noche','2018-11-27','1','2','23','refresh1.png'),(10,'sssssssssssssssssssssssssssssss',2147483647,'pruebasssss',888888888,'qqq@gmail.com','Rural','Día,Noche','2018-11-27','2','10','103','usd.png'),(11,'12344',2147483647,'pruebasssss',999999999,'qqq@gmail.com','Urbana','Día','2018-11-16','4','38','384','5208.jpg'),(12,'dddddddddddddd',2147483647,'pruebasssss',999999999,'qqq@gmail.com','Urbana','Noche','2018-11-16','3','32','304','tarjeta1.png'),(13,'sssssssssssssssssssssssssssssss',2147483647,'pruebasssss',999999999,'qqq@gmail.com','Urbana','Día','2018-11-27','1','28','302','52081.jpg'),(14,'tttttttttttttt',2147483647,'11111111111111',222222222,'9999@gmail.com','Urbana','Día,Tarde,Noche','2018-11-02','4','40','416','tarjeta2.png'),(15,'sssssssssssssssssssssssssssssss',2147483647,'pruebasssss',999999999,'qqq@gmail.com','Urbana','Tarde','2018-11-27','3','33','311','pdf.jpeg20181123_163536'),(16,'sssssssssssssssssssssssssssssss',2147483647,'ccccccccccc',999999999,'qqq@gmail.com','Urbana','Día','2018-11-13','5','48','486','20181123_165227.png');
+INSERT INTO `escuela` VALUES (1,'ttsssssssssssssssssssssssss',2147483647,'ccccccccccc',999999999,'qqq@gmail.com','Urbana','Tarde','2018-11-13','15','133','1354','20181129_171822.jpeg'),(2,'12344rrr',2147483647,'ccccccccccc',999999999,'qqq@gmail.com','Rural','Día,Tarde','2018-11-27','3','33','309','20181128_114714.jpg'),(3,'ASDASDyt',2147483647,'pruebasssss',999999999,'qqq@gmail.com','Urbana','Día','2018-11-27','4','39','397','20181128_115806.png'),(5,'12344',2147483647,'ccccccccccc',999999999,'qqq@gmail.com','Urbana','Noche','2018-11-27','2','11','108','20181129_171908.jpeg');
 /*!40000 ALTER TABLE `escuela` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `especialidad`
+--
+
+DROP TABLE IF EXISTS `especialidad`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `especialidad` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) DEFAULT NULL,
+  `estado` int(5) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `especialidad`
+--
+
+LOCK TABLES `especialidad` WRITE;
+/*!40000 ALTER TABLE `especialidad` DISABLE KEYS */;
+INSERT INTO `especialidad` VALUES (2,'prueba',1),(3,'prueba2',1),(4,'prueba 3',1),(5,'stt',1),(6,'123',1);
+/*!40000 ALTER TABLE `especialidad` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `estado`
+--
+
+DROP TABLE IF EXISTS `estado`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `estado` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) DEFAULT NULL,
+  `estado` int(5) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `estado`
+--
+
+LOCK TABLES `estado` WRITE;
+/*!40000 ALTER TABLE `estado` DISABLE KEYS */;
+/*!40000 ALTER TABLE `estado` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `formacion`
+--
+
+DROP TABLE IF EXISTS `formacion`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `formacion` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) DEFAULT NULL,
+  `estado` int(5) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `formacion`
+--
+
+LOCK TABLES `formacion` WRITE;
+/*!40000 ALTER TABLE `formacion` DISABLE KEYS */;
+/*!40000 ALTER TABLE `formacion` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -210,4 +283,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-23 17:14:01
+-- Dump completed on 2018-11-29 17:21:52

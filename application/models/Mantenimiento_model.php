@@ -99,6 +99,10 @@ class Mantenimiento_model extends CI_Model{
 	 	$this->db->insert('estado', $data);
         return true;
 	 }
+	public function delete_especialidad($id){
+	 	$this->db->where('id',$id);
+        return $this->db->delete('especialidad');
+	 }
 /*public function lista_escuela(){
 		$this->db->select('a.*,(b.departamento)as nomDepa,(c.provincia)as nomProv,(d.distrito)as nomDist');
 		$this->db->from('escuela a');

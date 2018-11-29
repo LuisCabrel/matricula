@@ -348,7 +348,7 @@ class Mantenimiento extends CI_Controller {
 	}
 	public function deletEspec(){
 		$id=$this->input->post('id');
-		$delete = $this->mantenimiento->delete_school($id);
+		$delete = $this->mantenimiento->delete_especialidad($id);
 		if ($delete=true) {
             $data=[
                 "resp"=>"true",

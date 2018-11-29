@@ -80,7 +80,7 @@ function tbl_escuela(){
 		dataType: "json",
 	    success: function(resp){
 	    	var html="";
-            var funcion="'del_school'";
+            var funcion="'deleteData'";
             var destinoURL="'delete_school'";
             var tabla="'tbl_escuela()'";
 	    	var item=resp.datos.length;
@@ -122,8 +122,10 @@ function msgDelete(id,funcion,destinoURL,tabla){
 
 
 //function del_school(id) {
-function del_school(id,destinoURL,tabla) {
+function deleteData(id,destinoURL,tabla) {
 	var string ="id="+id;
+    console.log(id);
+    console.log(destinoURL);
     console.log(tabla);	
 
 	$.ajax({
@@ -312,8 +314,8 @@ function tbl_espec(){
                  html+='<tr>'+
                         '<td><span id="nombre'+resp.especialidad[x]['id']+'">'+resp.especialidad[x]['nombre']+'</span></td>'+
                         '<td><div class="row"><center>'+
-                            '<i class="fa fa-pencil-square btn-tabla-edit" onclick="edit_especialidad('+resp.especialidad[x]['id']+')"></i>'+
-                            '<i class="fa fa-times-rectangle btn-tabla-delete" onclick="msgDelete('+resp.especialidad[x]['id']+",'deletEspec'"+",'tbl_espec()'"+')"></i></center></div>'+
+                            '<i class="fa fa-pencil-square btn-tabla-edit" onclick="editConfig('+resp.especialidad[x]['id']+",'especialidad'"+')"></i>'+
+                            '<i class="fa fa-times-rectangle btn-tabla-delete" onclick="msgDelete('+resp.especialidad[x]['id']+",'deleteData'"+",'deletEspec'"+",'tbl_espec()'"+')"></i></center></div>'+
                         '</td>'+                       
                         '</tr>';                
                 }
@@ -414,6 +416,11 @@ function guardarConfiguracion(form,input,destUrl,tabla){
         })  */
 
     // });
+}
+function editConfig(id,input){
+    $("#status").val("edit");
+    $("#id").val(id);
+    $("#"+input).val($("#nombre"+id).text());
 }
 
 

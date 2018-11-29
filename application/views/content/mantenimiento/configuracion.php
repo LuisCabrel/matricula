@@ -36,7 +36,9 @@
                                     <form class="form-inline" role="form" id="formEspec">
                                         <label class="control-label col-md-12">Especialidad</label>
                                         <div class="form-group">                                            
-                                            <div class="input-group">                                          
+                                            <div class="input-group">  
+                                            <input type="hidden" name="id" id="id" value="">
+                                            <input type="hidden" name="status" id="status" value="save">                           
                                                 <input class="form-control" type="text" id="especialidad" name="especialidad" placeholder=""/>
                                             </div>
                                         </div> 

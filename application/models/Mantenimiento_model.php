@@ -67,8 +67,36 @@ class Mantenimiento_model extends CI_Model{
             return false;
         }
 	}
+	public function listaForma(){
+		$this->db->select("*");
+		$this->db->from("formacion");		
+		$query = $this->db->get();
+		if($query->num_rows()>0){
+            return $query->result();
+        }else{
+            return false;
+        }
+	}
+	public function listaEstado(){
+		$this->db->select("*");
+		$this->db->from("estado");		
+		$query = $this->db->get();
+		if($query->num_rows()>0){
+            return $query->result();
+        }else{
+            return false;
+        }
+	}
 	public function guardar_especialidad($data){
 	 	$this->db->insert('especialidad', $data);
+        return true;
+	 }
+	public function guardar_formacion($data){
+	 	$this->db->insert('formacion', $data);
+        return true;
+	 }
+	public function guardar_estado($data){
+	 	$this->db->insert('estado', $data);
         return true;
 	 }
 /*public function lista_escuela(){

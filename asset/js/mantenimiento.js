@@ -40,6 +40,8 @@ $(document).on('click','#save_escuela',function(e){
                     cargarDepartamentos();
                     $("#provincia")[0].selectedIndex = -1;
                     $("#distrito")[0].selectedIndex = -1;
+                    $("#status").val("");
+                    $("#id_escuela").val("");
                      $('.formBTn').html('<button class="btn btn-info col-xs-12" id="save_escuela">Guadar</button>');
         			//alert(data['resp']);
 
@@ -51,6 +53,8 @@ $(document).on('click','#save_escuela',function(e){
                     $("#alertas").modal('show');
         		}else{
         			//alert(data['resp']);
+                    $("#status").val("");
+                    $("#id_escuela").val("");
                     $("#loading").hide();
                     $("#ico").html(ico_warning);
                     $("#ico").show();
@@ -266,7 +270,7 @@ function edit_school(id){
 }
 
 function limpiarformRegEsc(){
-    $("#formRegEsc")[0].reset();
+   $("#formRegEsc")[0].reset();
 }
 
 
@@ -309,7 +313,7 @@ function tbl_espec(){
                         '<td><span id="nombre'+resp.especialidad[x]['id']+'">'+resp.especialidad[x]['nombre']+'</span></td>'+
                         '<td><div class="row"><center>'+
                             '<i class="fa fa-pencil-square btn-tabla-edit" onclick="edit_especialidad('+resp.especialidad[x]['id']+')"></i>'+
-                            '<i class="fa fa-times-rectangle btn-tabla-delete" onclick="msgDelete('+resp.especialidad[x]['id']+')"></i></center></div>'+
+                            '<i class="fa fa-times-rectangle btn-tabla-delete" onclick="msgDelete('+resp.especialidad[x]['id']+",'deletEspec'"+",'tbl_espec()'"+')"></i></center></div>'+
                         '</td>'+                       
                         '</tr>';                
                 }
@@ -322,17 +326,23 @@ function tbl_espec(){
 }
 
 function guardarConfiguracion(form,input,destUrl,tabla){
-/*$(document).on( "click", "#btnsaveEspec", function(e) {
+    /*$(document).on( "click", "#btnsaveEspec", function(e) {
     e.preventDefault();*/
-    console.log(value);
-    console.log(value.id);
-    console.log(value.input.value);
-    /*if($('#especialidad').val()==""){
-        $('#formEspec').addClass('has-error'); 
+    console.log(form);
+    console.log(input);
+    console.log(destUrl);
+    console.log(tabla);
+    if($('#'+input).val()==""){
+        $('#'+form).addClass('has-error'); 
     }
-    var string = $("#formEspec").serialize(); 
+    //var string = $("#"+form).serialize(); console.log(string);
+    var string = {
+                "value" : $('#'+input).val(),
+                "input" : input
+        };
+        
     $.ajax({
-        url:'save_especialidad',
+        url:destUrl,
         type:'POST',
         data:string,
         beforeSend:function(){
@@ -343,7 +353,7 @@ function guardarConfiguracion(form,input,destUrl,tabla){
         success: function(resp){
             var x = JSON.parse(resp);
                  if(x.resp=='true'){
-                    $("#formEspec")[0].reset();
+                    $("#"+form)[0].reset();
                     $(".loading_bg").html("");
                     $("#loading").hide();
                     $("#ico").html(ico_ok);
@@ -351,9 +361,9 @@ function guardarConfiguracion(form,input,destUrl,tabla){
                     $("#msg1").html(x.msg);
                     $("#btn_modal").html(btn_cerrar);
                     $("#alertas").modal('show');
-                    tbl_espec();
+                    eval(tabla);
                  }else{
-                    $("#formEspec")[0].reset();
+                    $("#"+form)[0].reset();
                     $(".loading_bg").html("");
                     $("#loading").hide();
                     $("#ico").html(ico_warning);
@@ -363,9 +373,47 @@ function guardarConfiguracion(form,input,destUrl,tabla){
                     $("#alertas").modal('show');
                  }
         }
-    })  */
 
-// });
+    });
+    /*if($('#especialidad').val()==""){
+        $('#formEspec').addClass('has-error'); 
+        }
+        var string = $("#formEspec").serialize(); 
+        $.ajax({
+            url:'save_especialidad',
+            type:'POST',
+            data:string,
+            beforeSend:function(){
+                $(".loading_bg").html(loading);
+                $("#loading").show();
+                $("#alertas").show();
+            },
+            success: function(resp){
+                var x = JSON.parse(resp);
+                     if(x.resp=='true'){
+                        $("#formEspec")[0].reset();
+                        $(".loading_bg").html("");
+                        $("#loading").hide();
+                        $("#ico").html(ico_ok);
+                        $("#ico").show();
+                        $("#msg1").html(x.msg);
+                        $("#btn_modal").html(btn_cerrar);
+                        $("#alertas").modal('show');
+                        tbl_espec();
+                     }else{
+                        $("#formEspec")[0].reset();
+                        $(".loading_bg").html("");
+                        $("#loading").hide();
+                        $("#ico").html(ico_warning);
+                        $("#ico").show();
+                        $("#msg1").html(x.msg);
+                        $("#btn_modal").html(btn_cerrar);
+                        $("#alertas").modal('show');
+                     }
+            }
+        })  */
+
+    // });
 }
 
 

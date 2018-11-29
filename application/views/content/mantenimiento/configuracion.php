@@ -41,7 +41,7 @@
                                             </div>
                                         </div> 
                                         <span id="btnEspec">
-                                            <button type="button" class="btn btn-primary" id="btnsaveEspec" onclick="guardarConfiguracion('formEspec','especialidad','save_especialidad','tbl_espec()')"><i class="fa fa-save"></i></button>
+                                            <button type="button" class="btn btn-primary" id="btnsaveEspec" onclick="guardarConfiguracion('formEspec','especialidad','save_select','tbl_espec()')"><i class="fa fa-save"></i></button>
                                         <!-- <button type="submit" class="btn btn-danger"><i class="fa fa-save"></i></button> -->
                                         </span>                                   
                                         
@@ -72,7 +72,7 @@
                                 </div>
                                 <div class="panel-body">
                                     
-                                    <form class="form-inline" role="form">
+                                    <form class="form-inline" role="form" id="formForma">
                                         <label class="col-md-12">Formación</label>
                                         <div class="form-group">                                            
                                             <div class="input-group">                                          
@@ -80,8 +80,7 @@
                                             </div>
                                         </div> 
                                         <span id="btnForma">
-                                            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i></button>
-                                        <!-- <button type="submit" class="btn btn-danger"><i class="fa fa-save"></i></button> -->
+                                            <button type="button" class="btn btn-primary" id="btnsaveForma" onclick="guardarConfiguracion('formForma','formacion','save_select','tbl_forma()')"><i class="fa fa-save"></i></button>
                                         </span>                                   
                                         
                                     </form> 
@@ -115,7 +114,7 @@
                                 </div>
                                 <div class="panel-body">
                                     
-                                    <form class="form-inline" role="form">
+                                    <form class="form-inline" role="form" id="formEsta">
                                         <label class="col-md-12">Estado</label>
                                         <div class="form-group">                                            
                                             <div class="input-group">                                          
@@ -123,8 +122,7 @@
                                             </div>
                                         </div> 
                                         <span id="btnEstado">
-                                            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i></button>
-                                        <!-- <button type="submit" class="btn btn-danger"><i class="fa fa-save"></i></button> -->
+                                            <button type="button" class="btn btn-primary" id="btnsaveEsta" onclick="guardarConfiguracion('formEsta','estado','save_select','tbl_estado()')"><i class="fa fa-save"></i></button>
                                         </span>                                   
                                         
                                     </form> 

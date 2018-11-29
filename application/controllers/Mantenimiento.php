@@ -290,51 +290,6 @@ class Mantenimiento extends CI_Controller {
          }
          echo json_encode($data);
 	}
-	public function email(){
-		$this->load->view('content/mantenimiento/email');	
-	}
-
-	public function select(){
-		$this->load->view('content/mantenimiento/configuracion');
-	}
-
-	public function lista_especialidad(){
-		
-		$especialidad = $this->mantenimiento->listaEspec();
-		if ($especialidad!=false) {
-            $data=[
-                "resp"=>"true",
-                "especialidad"=>$especialidad,
-            ];
-         }else{
-            $data=[
-                "resp"=>"false",
-                "msg"=>"No se encontro información en la base de datos",
-            ];
-         }
-         echo json_encode($data);
-	
-	}
-	public function save_especialidad(){
-		$nombre=$this->input->post('especialidad');
-		$datos = array(
-			'nombre' => $nombre,
-		);
-		$result= $this->mantenimiento->guardar_especialidad($datos);
-
-		if ($result=true) {
-		 	$data=[
-		 		"resp"=>"true",
-		 		"msg"=>"Se registro Especialidad",
-		 	];
-		 }else{
-		 	$data=[
-		 		"resp"=>"false",
-		 		"msg"=>"Error al Registrar Especialidad",
-		 	];
-		 }
-		 echo json_encode($data);
-	}
 
 	public function email(){
 		$this->load->view('content/mantenimiento/email');	
@@ -361,12 +316,21 @@ class Mantenimiento extends CI_Controller {
          echo json_encode($data);
 	
 	}
-	public function save_especialidad(){
-		$nombre=$this->input->post('especialidad');
+	public function save_select(){
+		$name_input=$this->input->post('input');
+		$nombre=$this->input->post('value');		
+		
 		$datos = array(
 			'nombre' => $nombre,
 		);
-		$result= $this->mantenimiento->guardar_especialidad($datos);
+		if($name_input=="especialidad"){
+			$result= $this->mantenimiento->guardar_especialidad($datos);
+		}elseif ($name_input=="formacion") {
+			$result= $this->mantenimiento->guardar_formacion($datos);
+		}elseif ($name_input=="estado") {
+			$result= $this->mantenimiento->guardar_estado($datos);
+		}
+		
 
 		if ($result=true) {
 		 	$data=[
@@ -381,6 +345,43 @@ class Mantenimiento extends CI_Controller {
 		 }
 		 echo json_encode($data);
 	}
+	public function deletEspec(){
+		$id=$this->input->post('id');
+		$delete = $this->mantenimiento->delete_school($id);
+		if ($delete=true) {
+            $data=[
+                "resp"=>"true",
+                "msg"=>"Se elimino Registro",
+            ];
+         }else{
+            $data=[
+                "resp"=>"false",
+                "msg"=>"Error al Eliminar Registro",
+            ];
+         }
+         echo json_encode($data);
+	}
+
+	// public function save_formacion(){
+	// 	$nombre=$this->input->post('formacion');
+	// 	$datos = array(
+	// 		'nombre' => $nombre,
+	// 	);
+	// 	$result= $this->mantenimiento->guardar_especialidad($datos);
+
+	// 	if ($result=true) {
+	// 	 	$data=[
+	// 	 		"resp"=>"true",
+	// 	 		"msg"=>"Se registro Especialidad",
+	// 	 	];
+	// 	 }else{
+	// 	 	$data=[
+	// 	 		"resp"=>"false",
+	// 	 		"msg"=>"Error al Registrar Especialidad",
+	// 	 	];
+	// 	 }
+	// 	 echo json_encode($data);
+	// }
 
 
 

@@ -99,10 +99,30 @@ class Mantenimiento_model extends CI_Model{
 	 	$this->db->insert('estado', $data);
         return true;
 	 }
+	public function edit_especialidad($datos){
+		$this->db->update_batch('especialidad', $datos,'id');
+        return true;
+	}
+	public function edit_formacion($datos){
+		$this->db->update_batch('formacion', $datos,'id');
+        return true;
+	}
+	public function edit_estado($datos){
+		$this->db->update_batch('estado', $datos,'id');
+        return true;
+	}
 	public function delete_especialidad($id){
 	 	$this->db->where('id',$id);
         return $this->db->delete('especialidad');
-	 }
+	}
+	public function delete_formacion($id){
+	 	$this->db->where('id',$id);
+        return $this->db->delete('formacion');
+	}
+	public function delete_estado($id){
+	 	$this->db->where('id',$id);
+        return $this->db->delete('estado');
+	}
 /*public function lista_escuela(){
 		$this->db->select('a.*,(b.departamento)as nomDepa,(c.provincia)as nomProv,(d.distrito)as nomDist');
 		$this->db->from('escuela a');

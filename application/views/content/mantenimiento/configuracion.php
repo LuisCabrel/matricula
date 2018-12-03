@@ -42,9 +42,9 @@
                                                 <input class="form-control" type="text" id="especialidad" name="especialidad" placeholder=""/>
                                             </div>
                                         </div> 
-                                        <span id="btnEspec">
+                                        <span id="btnespecialidad">
                                             <button type="button" class="btn btn-primary" id="btnsaveEspec" onclick="guardarConfiguracion('formEspec','especialidad','save_select','tbl_espec()')"><i class="fa fa-save"></i></button>
-                                        <!-- <button type="submit" class="btn btn-danger"><i class="fa fa-save"></i></button> -->
+                                        <!-- <button type="button" class="btn btn-danger"><i class="fa fa-save"></i></button> -->
                                         </span>                                   
                                         
                                     </form> 
@@ -81,8 +81,9 @@
                                                 <input class="form-control" type="text" id="formacion" placeholder=""/>
                                             </div>
                                         </div> 
-                                        <span id="btnForma">
+                                        <span id="btnformacion">
                                             <button type="button" class="btn btn-primary" id="btnsaveForma" onclick="guardarConfiguracion('formForma','formacion','save_select','tbl_forma()')"><i class="fa fa-save"></i></button>
+
                                         </span>                                   
                                         
                                     </form> 
@@ -94,11 +95,8 @@
                                                 <th>Accion</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Tiger Nixon</td>
-                                                <td>System Architect</td>
-                                            </tr>
+                                        <tbody id="tblForma">
+                                            
                                         </tbody>
                                     </table>
                                 </div>
@@ -123,7 +121,7 @@
                                                 <input class="form-control" type="text" id="estado" placeholder=""/>
                                             </div>
                                         </div> 
-                                        <span id="btnEstado">
+                                        <span id="btnestado">
                                             <button type="button" class="btn btn-primary" id="btnsaveEsta" onclick="guardarConfiguracion('formEsta','estado','save_select','tbl_estado()')"><i class="fa fa-save"></i></button>
                                         </span>                                   
                                         
@@ -136,11 +134,8 @@
                                                 <th>Accion</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Tiger Nixon</td>
-                                                <td>System Architect</td>
-                                            </tr>
+                                        <tbody id="tblEstado">
+                                            
                                         </tbody>
                                     </table>
                                 </div>

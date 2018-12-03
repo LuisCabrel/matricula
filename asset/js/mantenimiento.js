@@ -1,10 +1,12 @@
 $(document).ready(function() {
 	tbl_escuela();
-    tbl_espec();    
+    tbl_espec();
+    tbl_forma(); 
+    tbl_estado();   
 
 });
 // document.write("<script type='text/javascript' src='"+path+"asset/js/funciones_generales.js'></script>");
-//$('#save_escuela').click(function(e){
+
 $(document).on('click','#save_escuela',function(e){
 	 e.preventDefault();
 	 var form= $("#formRegEsc").serialize();
@@ -35,15 +37,13 @@ $(document).on('click','#save_escuela',function(e){
         			$("#emailOK").html("");
         			document.getElementById('imgSalida1').src = "#";
         			$("#imgF1").val("");
-        			//$("#turnos")[0].selectedIndex = -1;
                     $('input:checkbox').each(function() { this.checked = false; });
                     cargarDepartamentos();
                     $("#provincia")[0].selectedIndex = -1;
                     $("#distrito")[0].selectedIndex = -1;
                     $("#status").val("");
                     $("#id_escuela").val("");
-                     $('.formBTn').html('<button class="btn btn-info col-xs-12" id="save_escuela">Guadar</button>');
-        			//alert(data['resp']);
+                     $('.formBTn').html('<button class="btn btn-info col-xs-12" id="save_escuela">Guadar</button>');        			
 
                     $("#loading").hide();
                     $("#ico").html(ico_ok);
@@ -110,9 +110,8 @@ function tbl_escuela(){
 }
 
 
-//function msgDelete(id){
 function msgDelete(id,funcion,destinoURL,tabla){
-	//$("#btn_modal").html(btn_delete1+"del_school("+id+")"+btn_delete2+" "+btn_cerrar);
+	
     $("#btn_modal").html(btn_delete1+funcion+"("+id+",'"+destinoURL+"','"+tabla+"')"+btn_delete2+" "+btn_cerrar);
 	$("#ico").html(ico_elimina);
 	 $("#loading").hide();
@@ -121,7 +120,6 @@ function msgDelete(id,funcion,destinoURL,tabla){
 }
 
 
-//function del_school(id) {
 function deleteData(id,destinoURL,tabla) {
 	var string ="id="+id;
     console.log(id);
@@ -129,7 +127,6 @@ function deleteData(id,destinoURL,tabla) {
     console.log(tabla);	
 
 	$.ajax({
-		//url:'delete_school',
         url:destinoURL,
 		type:'POST',
 		data:string,
@@ -141,7 +138,6 @@ function deleteData(id,destinoURL,tabla) {
 		        },
 		success: function(resp){
         	var x = JSON.parse(resp);
-                //tbl_escuela();
                 eval(tabla);
                 $("#loading").hide();
         		$("#ico").html(ico_ok);
@@ -154,9 +150,6 @@ function deleteData(id,destinoURL,tabla) {
 }
 
 function edit_school(id){
-    //console.log(id);
-
-    //var foto=$("#foto"+id).getAttribute("src");
     var foto=document.getElementById('img'+id).src;
     var zona=$("#zona"+id).text();
     var iddep = $("#departamento"+id).text();
@@ -175,8 +168,6 @@ function edit_school(id){
     $("#id_escuela").val(id);
 
     var res = foto.replace(path+"uploads/colegio/", "");
-    //$("#imgF1").val(res);
-
     var d,p,di;
     $.ajax({
         url: 'seleccion',
@@ -277,7 +268,6 @@ function limpiarformRegEsc(){
 
 
 $(document).on('click','#cancelar_escuela',function(e){
-//$("#cancelar_escuela").click(function(e){
     e.preventDefault();
     $("#formRegEsc")[0].reset();
      $("#status").val("");
@@ -296,8 +286,6 @@ $(document).on('click','#cancelar_escuela',function(e){
     $("#provincia")[0].selectedIndex = -1;
     $("#distrito")[0].selectedIndex = -1;
     
-
-
     $('.formBTn').html('<button class="btn btn-info col-xs-12" id="save_escuela">Guadar</button>');
 });
 
@@ -306,40 +294,73 @@ function tbl_espec(){
         url: 'lista_especialidad',
         dataType: "json",
         success: function(resp){
-            //console.log(resp.especialidad[0]['id']);
             var html="";
-            // if(resp.resp==true){
-                for(var x=0;x<resp.especialidad.length;x++){                
+                for(var x=0;x<resp.datos.length;x++){    
                 
                  html+='<tr>'+
-                        '<td><span id="nombre'+resp.especialidad[x]['id']+'">'+resp.especialidad[x]['nombre']+'</span></td>'+
+                        '<td><span id="especialidad'+resp.datos[x]['id']+'">'+resp.datos[x]['nombre']+'</span></td>'+
                         '<td><div class="row"><center>'+
-                            '<i class="fa fa-pencil-square btn-tabla-edit" onclick="editConfig('+resp.especialidad[x]['id']+",'especialidad'"+')"></i>'+
-                            '<i class="fa fa-times-rectangle btn-tabla-delete" onclick="msgDelete('+resp.especialidad[x]['id']+",'deleteData'"+",'deletEspec'"+",'tbl_espec()'"+')"></i></center></div>'+
+                            '<i class="fa fa-pencil-square btn-tabla-edit" onclick="editConfig('+resp.datos[x]['id']+",'especialidad'"+",'formEspec'"+",'save_select'"+",'tbl_espec()'"+')"></i>'+
+                            '<i class="fa fa-times-rectangle btn-tabla-delete" onclick="msgDelete('+resp.datos[x]['id']+",'deleteData'"+",'deletEspec'"+",'tbl_espec()'"+')"></i></center></div>'+
                         '</td>'+                       
                         '</tr>';                
                 }
-                $("#tblEspecialidad").html(html);
-            // }
-            
-                     
+                $("#tblEspecialidad").html(html);             
+        }
+    })
+}
+function tbl_forma(){
+    $.ajax({
+        url: 'lista_formacion',
+        dataType: "json",
+        success: function(resp){
+            var html="";
+                for(var x=0;x<resp.datos.length;x++){    
+                
+                 html+='<tr>'+
+                        '<td><span id="formacion'+resp.datos[x]['id']+'">'+resp.datos[x]['nombre']+'</span></td>'+
+                        '<td><div class="row"><center>'+
+                            '<i class="fa fa-pencil-square btn-tabla-edit" onclick="editConfig('+resp.datos[x]['id']+",'formacion'"+",'formForma'"+",'save_select'"+",'tbl_forma()'"+')"></i>'+
+                            '<i class="fa fa-times-rectangle btn-tabla-delete" onclick="msgDelete('+resp.datos[x]['id']+",'deleteData'"+",'deletForma'"+",'tbl_forma()'"+')"></i></center></div>'+
+                        '</td>'+                       
+                        '</tr>';                
+                }
+                $("#tblForma").html(html);             
+        }
+    })
+}
+function tbl_estado(){
+    $.ajax({
+        url: 'lista_estado',
+        dataType: "json",
+        success: function(resp){
+            var html="";
+                for(var x=0;x<resp.datos.length;x++){    
+                
+                 html+='<tr>'+
+                        '<td><span id="estado'+resp.datos[x]['id']+'">'+resp.datos[x]['nombre']+'</span></td>'+
+                        '<td><div class="row"><center>'+
+                            '<i class="fa fa-pencil-square btn-tabla-edit" onclick="editConfig('+resp.datos[x]['id']+",'estado'"+",'formEsta'"+",'save_select'"+",'tbl_estado()'"+')"></i>'+
+                            '<i class="fa fa-times-rectangle btn-tabla-delete" onclick="msgDelete('+resp.datos[x]['id']+",'deleteData'"+",'deletEstado'"+",'tbl_estado()'"+')"></i></center></div>'+
+                        '</td>'+                       
+                        '</tr>';                
+                }
+                $("#tblEstado").html(html);             
         }
     })
 }
 
 function guardarConfiguracion(form,input,destUrl,tabla){
     /*$(document).on( "click", "#btnsaveEspec", function(e) {
-    e.preventDefault();*/
-    console.log(form);
-    console.log(input);
-    console.log(destUrl);
-    console.log(tabla);
+    e.preventDefault();*/  
     if($('#'+input).val()==""){
         $('#'+form).addClass('has-error'); 
     }
     //var string = $("#"+form).serialize(); console.log(string);
     var string = {
-                "value" : $('#'+input).val(),
+                "id" : $('#id').val(),
+                "value" : $('#'+input).val(),                
+                "status" : $('#status').val(),
                 "input" : input
         };
         
@@ -356,6 +377,9 @@ function guardarConfiguracion(form,input,destUrl,tabla){
             var x = JSON.parse(resp);
                  if(x.resp=='true'){
                     $("#"+form)[0].reset();
+                    $("#status").val("save");
+                    $("#btn"+input).html('<button type="button" class="btn btn-primary" onclick="guardarConfiguracion('+"'"+form+"','"+input+"','"+destUrl+"','"+tabla+"'"+')"><i class="fa fa-save"></i></button>');
+                    $("#id").val("");
                     $(".loading_bg").html("");
                     $("#loading").hide();
                     $("#ico").html(ico_ok);
@@ -366,6 +390,9 @@ function guardarConfiguracion(form,input,destUrl,tabla){
                     eval(tabla);
                  }else{
                     $("#"+form)[0].reset();
+                    $("#status").val("save");
+                    $("#id").val("");
+                    $("#btn"+input).html('<button type="button" class="btn btn-primary" onclick="guardarConfiguracion('+"'"+form+"','"+input+"','"+destUrl+"','"+tabla+"'"+')"><i class="fa fa-save"></i></button>');
                     $(".loading_bg").html("");
                     $("#loading").hide();
                     $("#ico").html(ico_warning);
@@ -417,10 +444,20 @@ function guardarConfiguracion(form,input,destUrl,tabla){
 
     // });
 }
-function editConfig(id,input){
+function editConfig(id,input,form,destUrl,tabla){
+   
     $("#status").val("edit");
     $("#id").val(id);
-    $("#"+input).val($("#nombre"+id).text());
+    $("#"+input).val($("#"+input+""+id).text());
+    $("#btn"+input).html('<button type="button" class="btn btn-success" onclick="guardarConfiguracion('+"'"+form+"','"+input+"','"+destUrl+"','"+tabla+"'"+')"><i class="fa fa-save"></i></button>'
+        +'<button type="button" class="btn btn-warning" onclick="btnCancelarP('+"'"+form+"','"+input+"','"+destUrl+"','"+tabla+"'"+')"><i class="fa fa-reply"></i></button>');
+    
+}
+function btnCancelarP(form,input,destUrl,tabla){
+    $("#"+form)[0].reset();
+    $("#status").val("save");
+    $("#id").val("");
+    $("#btn"+input).html('<button type="button" class="btn btn-primary" onclick="guardarConfiguracion('+"'"+form+"','"+input+"','"+destUrl+"','"+tabla+"'"+')"><i class="fa fa-save"></i></button>');
 }
 
 

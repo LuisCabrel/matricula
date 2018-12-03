@@ -6,6 +6,7 @@ jQuery(document).ready(function() {
 	$('#provincia').change(cargarDistritos);
 });
 
+
 var btn_cerrar_='<button type="button" class="btn btn-danger col-md-6" data-dismiss="modal" aria-label="Close">Cerrar</button>';
 var btn_cerrar='<button type="button" class="btn btn-info col-md-6" data-dismiss="modal" aria-label="Close" style="margin:2px;">Cerrar</button>';
 var btn_delete1='<button type="button" class="btn btn-danger col-md-6"onclick="';
@@ -17,6 +18,7 @@ var msg_delete='Desea Eliminar Datos';
 var msg_eliminando='Elimininando Datos';
 var loading='<div align="center"><img src="'+path+'asset/img/loaders/loading.gif" width="40px;" height="40px;" /></div> ';
 var select='<option value="">Seleccione...</option>';
+
 
 function cargarDepartamentos() {
 	$.ajax({

@@ -290,11 +290,9 @@ class Mantenimiento extends CI_Controller {
          }
          echo json_encode($data);
 	}
-
-
-	public function email(){
+	/*public function email(){
 		$this->load->view('content/mantenimiento/email');	
-	}
+	}*/
 
 	public function select(){
 		$this->load->view('content/mantenimiento/configuracion');
@@ -306,7 +304,41 @@ class Mantenimiento extends CI_Controller {
 		if ($especialidad!=false) {
             $data=[
                 "resp"=>"true",
-                "especialidad"=>$especialidad,
+                "datos"=>$especialidad,
+            ];
+         }else{
+            $data=[
+                "resp"=>"false",
+                "msg"=>"No se encontro información en la base de datos",
+            ];
+         }
+         echo json_encode($data);
+	
+	}
+	public function lista_formacion(){
+		
+		$formacion = $this->mantenimiento->listaForma();
+		if ($formacion!=false) {
+            $data=[
+                "resp"=>"true",
+                "datos"=>$formacion,
+            ];
+         }else{
+            $data=[
+                "resp"=>"false",
+                "msg"=>"No se encontro información en la base de datos",
+            ];
+         }
+         echo json_encode($data);
+	
+	}
+	public function lista_estado(){
+		
+		$estado = $this->mantenimiento->listaEstado();
+		if ($estado!=false) {
+            $data=[
+                "resp"=>"true",
+                "datos"=>$estado,
             ];
          }else{
             $data=[
@@ -319,29 +351,59 @@ class Mantenimiento extends CI_Controller {
 	}
 	public function save_select(){
 		$name_input=$this->input->post('input');
-		$nombre=$this->input->post('value');		
+		$nombre=$this->input->post('value');
+		$id=$this->input->post('id');
+		$status=$this->input->post('status');		
 		
-		$datos = array(
+		if($status=="save"){
+
+			$datos = array(
 			'nombre' => $nombre,
-		);
-		if($name_input=="especialidad"){
-			$result= $this->mantenimiento->guardar_especialidad($datos);
-		}elseif ($name_input=="formacion") {
-			$result= $this->mantenimiento->guardar_formacion($datos);
-		}elseif ($name_input=="estado") {
-			$result= $this->mantenimiento->guardar_estado($datos);
+			);
+			if($name_input=="especialidad"){
+				$result= $this->mantenimiento->guardar_especialidad($datos);
+			}elseif ($name_input=="formacion") {
+				$result= $this->mantenimiento->guardar_formacion($datos);
+			}elseif ($name_input=="estado") {
+				$result= $this->mantenimiento->guardar_estado($datos);
+			}
+
+		}else{
+			$datos[] = array(
+				'id' => $id,
+				'nombre' => $nombre
+			);
+
+			if($name_input=="especialidad"){
+				$result= $this->mantenimiento->edit_especialidad($datos);
+			}elseif ($name_input=="formacion") {
+				$result= $this->mantenimiento->edit_formacion($datos);
+			}elseif ($name_input=="estado") {
+				$result= $this->mantenimiento->edit_estado($datos);
+			}
 		}
-		
+
+		/*if($status=="save"){
+			$msg="Se registro ".$name_input;
+			$msg2="error al Registrar".$name_input;
+		}else{
+			$msg="Se Modificaron datos";
+			$msg2="Error al Editar ".$name_input;
+		}*/
+
+
 
 		if ($result=true) {
+		if($status=="save"){$msg="Se registro ".$name_input;}else{$msg="Se modifico ".$name_input;}
 		 	$data=[
 		 		"resp"=>"true",
-		 		"msg"=>"Se registro Especialidad",
+		 		"msg"=>$msg,
 		 	];
 		 }else{
+		 if($status=="save"){$msg="Error al Registrar ".$name_input;}else{$msg="Error al Registrar ".$name_input;}
 		 	$data=[
 		 		"resp"=>"false",
-		 		"msg"=>"Error al Registrar Especialidad",
+		 		"msg"=>$msg2,
 		 	];
 		 }
 		 echo json_encode($data);
@@ -349,6 +411,38 @@ class Mantenimiento extends CI_Controller {
 	public function deletEspec(){
 		$id=$this->input->post('id');
 		$delete = $this->mantenimiento->delete_especialidad($id);
+		if ($delete=true) {
+            $data=[
+                "resp"=>"true",
+                "msg"=>"Se elimino Registro",
+            ];
+         }else{
+            $data=[
+                "resp"=>"false",
+                "msg"=>"Error al Eliminar Registro",
+            ];
+         }
+         echo json_encode($data);
+	}
+	public function deletForma(){
+		$id=$this->input->post('id');
+		$delete = $this->mantenimiento->delete_formacion($id);
+		if ($delete=true) {
+            $data=[
+                "resp"=>"true",
+                "msg"=>"Se elimino Registro",
+            ];
+         }else{
+            $data=[
+                "resp"=>"false",
+                "msg"=>"Error al Eliminar Registro",
+            ];
+         }
+         echo json_encode($data);
+	}
+	public function deletEstado(){
+		$id=$this->input->post('id');
+		$delete = $this->mantenimiento->delete_estado($id);
 		if ($delete=true) {
             $data=[
                 "resp"=>"true",

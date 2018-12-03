@@ -1942,7 +1942,8 @@ ul.panel-controls > li > .dropdown-menu:before {
 /* BUTTONS */
 .btn {
   font-size: 12px;
-  padding: 4px 15px;
+  padding: 4px 10px;
+  margin: 2px;
   line-height: 20px;
   font-weight: 400;
   -moz-border-radius: 3px;
@@ -1953,11 +1954,12 @@ ul.panel-controls > li > .dropdown-menu:before {
   -ms-transition: all 200ms ease;
   -o-transition: all 200ms ease;
   transition: all 200ms ease;
+   
 }
 .btn.btn-lg,
 .btn-group-lg > .btn {
   font-size: 14px;
-  padding: 8px 20px;
+  padding: 8px 10px;
 }
 .btn.btn-sm,
 .btn-group-sm > .btn {

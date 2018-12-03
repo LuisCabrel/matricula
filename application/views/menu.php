@@ -84,11 +84,7 @@
                         <a href="#"><span class="fa fa-cog"></span> <span class="xn-text">Mantenimiento</span></a>
                         <ul>
                             <li class="li"><a href="<?php echo base_url();?>mantenimiento/escuela"><span class="fa fa-university"></span> Registrar Escuela</a></li>
-                        </ul>
-                        <ul>
                             <li class="li"><a href="<?php echo base_url();?>mantenimiento/email"><span class="fa fa-envelope"></span> Enviar Email</a></li>
-                        </ul>
-                        <ul>
                             <li class="li"><a href="<?php echo base_url();?>mantenimiento/select"><span class="fa fa-envelope"></span> Configuración</a></li>
                         </ul>
                     </li> 

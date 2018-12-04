@@ -31,7 +31,7 @@
                                     <br>
                                     <div class="col-md-3">
                                       <input type="hidden" name="imgF2" id="imgF2">
-                                        <img id="imgSalida2" width="200" height="130" src="" />
+                                        <img id="imgSalida2" width="200" height="200" src="" />
                                     </div>
                                   </div>
                                   
@@ -59,26 +59,6 @@
                                         <label class="control-label">Celular</label>
                                         <input type="text" class="form-control numeric" id="celular" name="celular" maxlength="9">
                                     </div>
-                                    <div class="form-group col-md-3" id="6">
-                                        <label class="control-label">Correo Electronico</label>
-                                        <input type="text" class="form-control" id="correo" name="correo" onChange="valemail(this.value)" placeholder="">
-                                        <span class="email" id="emailOK"></span>
-                                    </div>
-                                    <div class="form-group col-md-3" id="7">
-                                      <label class="control-label">Zona</label><span class="fs-arrow"></span>
-                                      <select class="form-control" id="zona" name="zona">
-                                       </select>
-                                    </div>
-                                    <div class="form-group col-md-3" id="8">
-                                        <label class="control-label">Turnos</label>
-                                        <input type="hidden" name="turnos_" id="turnos_" />
-                                        <div class="form-group" id="turnox">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-md-3" id="9">
-                                        <label class="control-label">Año de Creación</label>
-                                        <input type="text" class="form-control datepicker" id="creacion" name="creacion" placeholder="">
-                                    </div>
                                     <div class="form-group col-md-3" id="10">
                                       <label class="control-label">Departamento</label><span class="fs-arrow"></span>
                                       <select class="form-control" id="departamento" name="departamento">
@@ -93,7 +73,35 @@
                                       <label class="control-label">Distrito</label><span class="fs-arrow"></span>
                                       <select class="form-control" id="distrito" name="distrito">
                                       </select>
-                                    </div>                                
+                                    </div>
+                                    <div class="form-group col-md-3" id="9">
+                                        <label class="control-label">Fecha Nacimiento</label>
+                                        <input type="text" class="form-control datepicker" id="creacion" name="creacion" placeholder="">
+                                    </div>
+                                    <div class="form-group col-md-3" id="6">
+                                        <label class="control-label">Correo Electronico</label>
+                                        <input type="text" class="form-control" id="correo" name="correo" onChange="valemail(this.value)" placeholder="">
+                                        <span class="email" id="emailOK"></span>
+                                    </div>
+                                    <div class="form-group col-md-3" id="9">
+                                        <label class="control-label">Fecha Ingreso</label>
+                                        <input type="text" class="form-control datepicker" id="creacion" name="creacion" placeholder="">
+                                    </div>
+                                    <div class="form-group col-md-3" id="10">
+                                      <label class="control-label">Cargo</label><span class="fs-arrow"></span>
+                                      <select class="form-control" id="cargo" name="cargo">
+                                      </select>
+                                    </div>
+                                    <div class="form-group col-md-3" id="11">
+                                      <label class="control-label">Especialidad</label><span class="fs-arrow"></span>
+                                      <select class="form-control" id="especialidad" name="especialidad">                                      
+                                      </select>
+                                    </div>
+                                    <div class="form-group col-md-3" id="12">
+                                      <label class="control-label">Formación</label><span class="fs-arrow"></span>
+                                      <select class="form-control" id="formacion" name="formacion">
+                                      </select>
+                                    </div>                    
                             </div> 
                             <div class="form-group col-xs-12 col-md-3 formBTn">
                               <button class="btn btn-info col-xs-12" id="save_escuela">Guardar</button>  

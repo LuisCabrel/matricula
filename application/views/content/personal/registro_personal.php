@@ -31,7 +31,7 @@
                                     <br>
                                     <div class="col-md-3">
                                       <input type="hidden" name="imgF2" id="imgF2">
-                                        <img id="imgSalida2" width="200" height="200" src="" />
+                                        <img id="imgSalida2" width="200" height="270" src="" />
                                     </div>
                                   </div>
                                   
@@ -48,10 +48,6 @@
                                       <input type="text" class="form-control" id="apellido"  name="apellido"placeholder="">
                                     </div>
                                     <div class="form-group col-md-3" id="5">
-                                        <label class="control-label">Dirección</label>
-                                        <input type="text" class="form-control numeric" id="direccion" name="direccion" placeholder="">
-                                    </div>
-                                    <div class="form-group col-md-3" id="5">
                                         <label class="control-label">Telefono</label>
                                         <input type="text" class="form-control numeric" id="telefono" name="telefono" maxlength="9">
                                     </div>
@@ -59,6 +55,10 @@
                                         <label class="control-label">Celular</label>
                                         <input type="text" class="form-control numeric" id="celular" name="celular" maxlength="9">
                                     </div>
+                                    <div class="form-group col-md-3" id="5">
+                                        <label class="control-label">Dirección de Domicilio</label>
+                                        <input type="text" class="form-control numeric" id="direccion" name="direccion" placeholder="">
+                                    </div>                                    
                                     <div class="form-group col-md-3" id="10">
                                       <label class="control-label">Departamento</label><span class="fs-arrow"></span>
                                       <select class="form-control" id="departamento" name="departamento">
@@ -77,6 +77,15 @@
                                     <div class="form-group col-md-3" id="9">
                                         <label class="control-label">Fecha Nacimiento</label>
                                         <input type="text" class="form-control datepicker" id="creacion" name="creacion" placeholder="">
+                                    </div>
+                                    <div class="form-group col-md-6" id="5">
+                                        <label class="control-label">Lugar de Nacimiento</label>
+                                        <input type="text" class="form-control numeric" id="direccion" name="direccion" placeholder="">
+                                    </div>
+                                    <div class="form-group col-md-3" id="12">
+                                      <label class="control-label">Género</label><span class="fs-arrow"></span>
+                                      <select class="form-control" id="distrito" name="distrito">
+                                      </select>
                                     </div>
                                     <div class="form-group col-md-3" id="6">
                                         <label class="control-label">Correo Electronico</label>
@@ -108,6 +117,16 @@
                             </div>
                           <br>            
                         </form>
+                        <table class="table datatable_simple">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Accion</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tblPersonal">                                            
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

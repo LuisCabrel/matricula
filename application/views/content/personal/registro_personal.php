@@ -3,7 +3,7 @@
  $this->load->view('menu');
 ?>
 <div class="page-content">
-	<?php 
+  <?php 
     $this->load->view('menu_head');
     ?>
     <!-- START BREADCRUMB -->
@@ -13,8 +13,8 @@
     </ul>
     <!-- END BREADCRUMB -->
     <div class="row">
-    	<div class="col-md-12">    		
-			<div class="panel panel-default">
+      <div class="col-md-12">       
+      <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title"><strong>Registro Personal</strong></h3>
                     <ul class="panel-controls">
@@ -130,7 +130,7 @@
                     </div>
                 </div>
             </div>
-    	</div>
+      </div>
     </div>
 </div>
     

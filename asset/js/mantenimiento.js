@@ -2,7 +2,20 @@ $(document).ready(function() {
 	tbl_escuela();
     tbl_espec();
     tbl_forma(); 
-    tbl_estado();   
+    tbl_estado();
+    tbl_cargo(); 
+     
+    $('.display').DataTable({
+        "scrollY":"200px",
+        "bSort": false,
+        //"pageLength": 5,
+        //"iDisplayLength": 10,  
+        //"displayLength": 5,
+        "scrollCollapse": true,
+        "paging": false,
+        "searching": false,
+        "info": false
+    } );
 
 });
 // document.write("<script type='text/javascript' src='"+path+"asset/js/funciones_generales.js'></script>");
@@ -52,7 +65,6 @@ $(document).on('click','#save_escuela',function(e){
                     $("#btn_modal").html(btn_cerrar);
                     $("#alertas").modal('show');
         		}else{
-        			//alert(data['resp']);
                     $("#status").val("");
                     $("#id_escuela").val("");
                     $("#loading").hide();
@@ -118,7 +130,6 @@ function msgDelete(id,funcion,destinoURL,tabla){
 	$("#msg1").html(msg_delete);
 	$("#alertas").modal('show');
 }
-
 
 function deleteData(id,destinoURL,tabla) {
 	var string ="id="+id;
@@ -264,8 +275,7 @@ function edit_school(id){
 
 function limpiarformRegEsc(){
    $("#formRegEsc")[0].reset();
-}
-
+ }
 
 $(document).on('click','#cancelar_escuela',function(e){
     e.preventDefault();
@@ -349,18 +359,54 @@ function tbl_estado(){
         }
     })
 }
-
-function guardarConfiguracion(form,input,destUrl,tabla){
-    /*$(document).on( "click", "#btnsaveEspec", function(e) {
-    e.preventDefault();*/  
+function tbl_cargo(){
+    $.ajax({
+        url: 'lista_cargo',
+        dataType: "json",
+        success: function(resp){
+            var html="";
+                for(var x=0;x<resp.datos.length;x++){    
+                
+                 html+='<tr>'+
+                        '<td><span id="cargo'+resp.datos[x]['id']+'">'+resp.datos[x]['nombre']+'</span></td>'+
+                        '<td><div class="row"><center>'+
+                            '<i class="fa fa-pencil-square btn-tabla-edit" onclick="editConfig('+resp.datos[x]['id']+",'cargo'"+",'formCargo'"+",'save_select'"+",'tbl_cargo()'"+')"></i>'+
+                            '<i class="fa fa-times-rectangle btn-tabla-delete" onclick="msgDelete('+resp.datos[x]['id']+",'deleteData'"+",'deletCargo'"+",'tbl_cargo()'"+')"></i></center></div>'+
+                        '</td>'+                       
+                        '</tr>';                
+                }
+                $("#tblCargo").html(html);             
+        }
+    })
+}
+function tbl_asignatura(){
+    $.ajax({
+        url: 'lista_asignatura',
+        dataType: "json",
+        success: function(resp){
+            var html="";
+                for(var x=0;x<resp.datos.length;x++){    
+                
+                 html+='<tr>'+
+                        '<td><span id="asignatura'+resp.datos[x]['id']+'">'+resp.datos[x]['nombre']+'</span></td>'+
+                        '<td><div class="row"><center>'+
+                            '<i class="fa fa-pencil-square btn-tabla-edit" onclick="editConfig('+resp.datos[x]['id']+",'asignatura'"+",'formCargo'"+",'save_select'"+",'tbl_asignatura()'"+')"></i>'+
+                            '<i class="fa fa-times-rectangle btn-tabla-delete" onclick="msgDelete('+resp.datos[x]['id']+",'deleteData'"+",'deletAsignatura'"+",'tbl_asignatura()'"+')"></i></center></div>'+
+                        '</td>'+                       
+                        '</tr>';                
+                }
+                $("#tblAsignatura").html(html);             
+        }
+    })
+}
+function guardarConfiguracion(form,input,destUrl,tabla){    
     if($('#'+input).val()==""){
         $('#'+form).addClass('has-error'); 
-    }
-    //var string = $("#"+form).serialize(); console.log(string);
+    }   
     var string = {
-                "id" : $('#id').val(),
+                "id" : $('#id'+input).val(),
                 "value" : $('#'+input).val(),                
-                "status" : $('#status').val(),
+                "status" : $('#status'+input).val(),
                 "input" : input
         };
         
@@ -377,9 +423,9 @@ function guardarConfiguracion(form,input,destUrl,tabla){
             var x = JSON.parse(resp);
                  if(x.resp=='true'){
                     $("#"+form)[0].reset();
-                    $("#status").val("save");
+                    $("#status"+input).val("save");
                     $("#btn"+input).html('<button type="button" class="btn btn-primary" onclick="guardarConfiguracion('+"'"+form+"','"+input+"','"+destUrl+"','"+tabla+"'"+')"><i class="fa fa-save"></i></button>');
-                    $("#id").val("");
+                    $("#id"+input).val("");
                     $(".loading_bg").html("");
                     $("#loading").hide();
                     $("#ico").html(ico_ok);
@@ -390,8 +436,8 @@ function guardarConfiguracion(form,input,destUrl,tabla){
                     eval(tabla);
                  }else{
                     $("#"+form)[0].reset();
-                    $("#status").val("save");
-                    $("#id").val("");
+                    $("#status"+input).val("save");
+                    $("#id"+input).val("");
                     $("#btn"+input).html('<button type="button" class="btn btn-primary" onclick="guardarConfiguracion('+"'"+form+"','"+input+"','"+destUrl+"','"+tabla+"'"+')"><i class="fa fa-save"></i></button>');
                     $(".loading_bg").html("");
                     $("#loading").hide();
@@ -403,51 +449,12 @@ function guardarConfiguracion(form,input,destUrl,tabla){
                  }
         }
 
-    });
-    /*if($('#especialidad').val()==""){
-        $('#formEspec').addClass('has-error'); 
-        }
-        var string = $("#formEspec").serialize(); 
-        $.ajax({
-            url:'save_especialidad',
-            type:'POST',
-            data:string,
-            beforeSend:function(){
-                $(".loading_bg").html(loading);
-                $("#loading").show();
-                $("#alertas").show();
-            },
-            success: function(resp){
-                var x = JSON.parse(resp);
-                     if(x.resp=='true'){
-                        $("#formEspec")[0].reset();
-                        $(".loading_bg").html("");
-                        $("#loading").hide();
-                        $("#ico").html(ico_ok);
-                        $("#ico").show();
-                        $("#msg1").html(x.msg);
-                        $("#btn_modal").html(btn_cerrar);
-                        $("#alertas").modal('show');
-                        tbl_espec();
-                     }else{
-                        $("#formEspec")[0].reset();
-                        $(".loading_bg").html("");
-                        $("#loading").hide();
-                        $("#ico").html(ico_warning);
-                        $("#ico").show();
-                        $("#msg1").html(x.msg);
-                        $("#btn_modal").html(btn_cerrar);
-                        $("#alertas").modal('show');
-                     }
-            }
-        })  */
-
-    // });
+    });    
 }
 function editConfig(id,input,form,destUrl,tabla){
    
-    $("#status").val("edit");
-    $("#id").val(id);
+    $("#status"+input).val("edit");
+    $("#id"+input).val(id);
     $("#"+input).val($("#"+input+""+id).text());
     $("#btn"+input).html('<button type="button" class="btn btn-success" onclick="guardarConfiguracion('+"'"+form+"','"+input+"','"+destUrl+"','"+tabla+"'"+')"><i class="fa fa-save"></i></button>'
         +'<button type="button" class="btn btn-warning" onclick="btnCancelarP('+"'"+form+"','"+input+"','"+destUrl+"','"+tabla+"'"+')"><i class="fa fa-reply"></i></button>');
@@ -459,13 +466,9 @@ function btnCancelarP(form,input,destUrl,tabla){
     $("#id").val("");
     $("#btn"+input).html('<button type="button" class="btn btn-primary" onclick="guardarConfiguracion('+"'"+form+"','"+input+"','"+destUrl+"','"+tabla+"'"+')"><i class="fa fa-save"></i></button>');
 }
-
-
-
-
-// $('#tbl_escuela').on('click','td',function( e, settings, data ){
-//     // celdaP = tbl_escuela.cell(this).data(); 
-//      console.log("celda: "+e);
-//      console.log("celda: "+settings);
-//      console.log("celda: "+data);
-// });
+function busqueda(valor,tbl){   
+     var value = valor;
+     $("#"+tbl+" tr").filter(function() {
+       $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+     });
+}

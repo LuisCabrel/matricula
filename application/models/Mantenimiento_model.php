@@ -87,6 +87,26 @@ class Mantenimiento_model extends CI_Model{
             return false;
         }
 	}
+	public function listaCargo(){
+		$this->db->select("*");
+		$this->db->from("cargo");		
+		$query = $this->db->get();
+		if($query->num_rows()>0){
+            return $query->result();
+        }else{
+            return false;
+        }
+	}
+	public function listaAsignatura(){
+		$this->db->select("*");
+		$this->db->from("asignatura");		
+		$query = $this->db->get();
+		if($query->num_rows()>0){
+            return $query->result();
+        }else{
+            return false;
+        }
+	}
 	public function guardar_especialidad($data){
 	 	$this->db->insert('especialidad', $data);
         return true;
@@ -97,6 +117,14 @@ class Mantenimiento_model extends CI_Model{
 	 }
 	public function guardar_estado($data){
 	 	$this->db->insert('estado', $data);
+        return true;
+	 }
+	 public function guardar_cargo($data){
+	 	$this->db->insert('cargo', $data);
+        return true;
+	 }
+	 public function guardar_asignatura($data){
+	 	$this->db->insert('asignatura', $data);
         return true;
 	 }
 	public function edit_especialidad($datos){
@@ -111,6 +139,14 @@ class Mantenimiento_model extends CI_Model{
 		$this->db->update_batch('estado', $datos,'id');
         return true;
 	}
+	public function edit_cargo($datos){
+		$this->db->update_batch('cargo', $datos,'id');
+        return true;
+	}
+	public function edit_asignatura($datos){
+		$this->db->update_batch('asignatura', $datos,'id');
+        return true;
+	}
 	public function delete_especialidad($id){
 	 	$this->db->where('id',$id);
         return $this->db->delete('especialidad');
@@ -122,6 +158,14 @@ class Mantenimiento_model extends CI_Model{
 	public function delete_estado($id){
 	 	$this->db->where('id',$id);
         return $this->db->delete('estado');
+	}
+	public function delete_cargo($id){
+	 	$this->db->where('id',$id);
+        return $this->db->delete('cargo');
+	}
+	public function delete_asignatura($id){
+	 	$this->db->where('id',$id);
+        return $this->db->delete('asignatura');
 	}
 /*public function lista_escuela(){
 		$this->db->select('a.*,(b.departamento)as nomDepa,(c.provincia)as nomProv,(d.distrito)as nomDist');

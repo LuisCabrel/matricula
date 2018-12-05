@@ -37,9 +37,9 @@
                                         <label class="control-label col-md-12">Especialidad</label>
                                         <div class="form-group">                                            
                                             <div class="input-group">  
-                                            <input type="hidden" name="id" id="id" value="">
-                                            <input type="hidden" name="status" id="status" value="save">                           
-                                                <input class="form-control" type="text" id="especialidad" name="especialidad" placeholder=""/>
+                                            <input type="hidden" name="id" id="idespecialidad" value="">
+                                            <input type="hidden" name="status" id="statusespecialidad" value="save">                           
+                                                <input class="form-control" type="text" id="especialidad" name="especialidad" placeholder="" onkeyup="busqueda(this.value,'tblEspecialidad')"/>
                                             </div>
                                         </div> 
                                         <span id="btnespecialidad">
@@ -49,7 +49,7 @@
                                         
                                     </form> 
                                     
-                                    <table class="table datatable_simple">
+                                    <table class="table display">
                                         <thead>
                                             <tr>
                                                 <th>Nombre</th>
@@ -77,8 +77,10 @@
                                     <form class="form-inline" role="form" id="formForma">
                                         <label class="col-md-12">Formación</label>
                                         <div class="form-group">                                            
-                                            <div class="input-group">                                          
-                                                <input class="form-control" type="text" id="formacion" placeholder=""/>
+                                            <div class="input-group">
+                                            <input type="hidden" name="id" id="idformacion" value="">
+                                            <input type="hidden" name="status" id="statusformacion" value="save">                                          
+                                                <input class="form-control" type="text" id="formacion" placeholder="" onkeyup="busqueda(this.value,'tblForma')"/>
                                             </div>
                                         </div> 
                                         <span id="btnformacion">
@@ -88,7 +90,7 @@
                                         
                                     </form> 
                                     
-                                    <table class="table datatable_simple">
+                                    <table class="table display">
                                         <thead>
                                             <tr>
                                                 <th>Nombre</th>
@@ -117,8 +119,10 @@
                                     <form class="form-inline" role="form" id="formEsta">
                                         <label class="col-md-12">Estado</label>
                                         <div class="form-group">                                            
-                                            <div class="input-group">                                          
-                                                <input class="form-control" type="text" id="estado" placeholder=""/>
+                                            <div class="input-group">
+                                            <input type="hidden" name="id" id="idestado" value="">
+                                            <input type="hidden" name="status" id="statusestado" value="save">                                           
+                                                <input class="form-control" type="text" id="estado" placeholder="" onkeyup="busqueda(this.value,'tblEstado')"/>
                                             </div>
                                         </div> 
                                         <span id="btnestado">
@@ -127,7 +131,7 @@
                                         
                                     </form> 
                                     
-                                    <table class="table datatable_simple">
+                                    <table class="table display" id="tbldatos">
                                         <thead>
                                             <tr>
                                                 <th>Nombre</th>
@@ -141,32 +145,89 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">                                
-                                <h3 class="panel-title">Simple</h3>   
-                                <ul class="panel-controls">
-                                    <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span></a></li>
-                                    <li><a href="#" class="panel-refresh"><span class="fa fa-refresh"></span></a></li>
-                                    <li><a href="#" class="panel-remove"><span class="fa fa-times"></span></a></li>
-                                </ul>                                
-                            </div>
-                            <div class="panel-body">
-                                <table class="table datatable_simple">
-                                    <thead>
-                                        <tr>
-                                            <th>Nombre</th>
-                                            <th>Accion</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                        <div class="col-md-4">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">                                
+                                    <h3 class="panel-title">Cargo</h3>   
+                                    <ul class="panel-controls">
+                                        <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span></a></li>
+                                        <li><a href="#" class="panel-refresh"><span class="fa fa-refresh"></span></a></li>
+                                        <li><a href="#" class="panel-remove"><span class="fa fa-times"></span></a></li>
+                                    </ul>                                
+                                </div>
+                                <div class="panel-body">
+                                    
+                                    <form class="form-inline" role="form" id="formCargo">
+                                        <label class="col-md-12">Cargo</label>
+                                        <div class="form-group">                                            
+                                            <div class="input-group">  
+                                            <input type="hidden" name="id" id="idcargo" value="">
+                                            <input type="hidden" name="status" id="statuscargo" value="save">                                         
+                                                <input class="form-control" type="text" id="cargo" placeholder="" onkeyup="busqueda(this.value,'tblCargo')" />
+                                            </div>
+                                        </div> 
+                                        <span id="btncargo">
+                                            <button type="button" class="btn btn-primary" id="btnsaveCargo" onclick="guardarConfiguracion('formCargo','cargo','save_select','tbl_cargo()')"><i class="fa fa-save"></i></button>
+                                        </span>                                   
+                                        
+                                    </form> 
+                                    
+                                    <table class="table display" id="tbldatos">
+                                        <thead>
+                                            <tr>
+                                                <th>Nombre</th>
+                                                <th>Accion</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tblCargo">
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
+                        <div class="col-md-4">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">                                
+                                    <h3 class="panel-title">Asignaturas</h3>   
+                                    <ul class="panel-controls">
+                                        <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span></a></li>
+                                        <li><a href="#" class="panel-refresh"><span class="fa fa-refresh"></span></a></li>
+                                        <li><a href="#" class="panel-remove"><span class="fa fa-times"></span></a></li>
+                                    </ul>                                
+                                </div>
+                                <div class="panel-body">
+                                    
+                                    <form class="form-inline" role="form" id="formAsignatura">
+                                        <label class="col-md-12">Asignaturas</label>
+                                        <div class="form-group">                                            
+                                            <div class="input-group">  
+                                            <input type="hidden" name="id" id="idasignatura" value="">
+                                            <input type="hidden" name="status" id="statusasignatura" value="save">                                         
+                                                <input class="form-control" type="text" id="asignatura" placeholder="" onkeyup="busqueda(this.value,'tblAsignatura')" />
+                                            </div>
+                                        </div> 
+                                        <span id="btnasignatura">
+                                            <button type="button" class="btn btn-primary" id="btnsaveCargo" onclick="guardarConfiguracion('formAsignatura','asignatura','save_select','tbl_asignatura()')"><i class="fa fa-save"></i></button>
+                                        </span>                                   
+                                        
+                                    </form> 
+                                    
+                                    <table class="table display" id="tbldatos">
+                                        <thead>
+                                            <tr>
+                                                <th>Asignatura</th>
+                                                <th>Accion</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tblAsignatura">
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        
                     </div>
                 </div>
             </div>

@@ -349,6 +349,40 @@ class Mantenimiento extends CI_Controller {
          echo json_encode($data);
 	
 	}
+	public function lista_cargo(){
+		
+		$cargo = $this->mantenimiento->listaCargo();
+		if ($cargo!=false) {
+            $data=[
+                "resp"=>"true",
+                "datos"=>$cargo,
+            ];
+         }else{
+            $data=[
+                "resp"=>"false",
+                "msg"=>"No se encontro información en la base de datos",
+            ];
+         }
+         echo json_encode($data);
+	
+	}
+	public function lista_asignatura(){
+		
+		$asignatura = $this->mantenimiento->listaAsignatura();
+		if ($asignatura!=false) {
+            $data=[
+                "resp"=>"true",
+                "datos"=>$asignatura,
+            ];
+         }else{
+            $data=[
+                "resp"=>"false",
+                "msg"=>"No se encontro información en la base de datos",
+            ];
+         }
+         echo json_encode($data);
+	
+	}
 	public function save_select(){
 		$name_input=$this->input->post('input');
 		$nombre=$this->input->post('value');
@@ -366,6 +400,10 @@ class Mantenimiento extends CI_Controller {
 				$result= $this->mantenimiento->guardar_formacion($datos);
 			}elseif ($name_input=="estado") {
 				$result= $this->mantenimiento->guardar_estado($datos);
+			}elseif ($name_input=="cargo") {
+				$result= $this->mantenimiento->guardar_cargo($datos);
+			}elseif ($name_input=="asignatura") {
+				$result= $this->mantenimiento->guardar_asignatura($datos);
 			}
 
 		}else{
@@ -380,6 +418,10 @@ class Mantenimiento extends CI_Controller {
 				$result= $this->mantenimiento->edit_formacion($datos);
 			}elseif ($name_input=="estado") {
 				$result= $this->mantenimiento->edit_estado($datos);
+			}elseif ($name_input=="cargo") {
+				$result= $this->mantenimiento->edit_cargo($datos);
+			}elseif ($name_input=="asignatura") {
+				$result= $this->mantenimiento->edit_asignatura($datos);
 			}
 		}
 
@@ -443,6 +485,38 @@ class Mantenimiento extends CI_Controller {
 	public function deletEstado(){
 		$id=$this->input->post('id');
 		$delete = $this->mantenimiento->delete_estado($id);
+		if ($delete=true) {
+            $data=[
+                "resp"=>"true",
+                "msg"=>"Se elimino Registro",
+            ];
+         }else{
+            $data=[
+                "resp"=>"false",
+                "msg"=>"Error al Eliminar Registro",
+            ];
+         }
+         echo json_encode($data);
+	}
+	public function deletCargo(){
+		$id=$this->input->post('id');
+		$delete = $this->mantenimiento->delete_cargo($id);
+		if ($delete=true) {
+            $data=[
+                "resp"=>"true",
+                "msg"=>"Se elimino Registro",
+            ];
+         }else{
+            $data=[
+                "resp"=>"false",
+                "msg"=>"Error al Eliminar Registro",
+            ];
+         }
+         echo json_encode($data);
+	}
+	public function deletAsignatura(){
+		$id=$this->input->post('id');
+		$delete = $this->mantenimiento->delete_asignatura($id);
 		if ($delete=true) {
             $data=[
                 "resp"=>"true",

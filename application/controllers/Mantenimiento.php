@@ -383,6 +383,23 @@ class Mantenimiento extends CI_Controller {
          echo json_encode($data);
 	
 	}
+	public function lista_nivel(){
+		
+		$nivel = $this->mantenimiento->listaNivelnivel();
+		if ($asignatura!=false) {
+            $data=[
+                "resp"=>"true",
+                "datos"=>$nivel,
+            ];
+         }else{
+            $data=[
+                "resp"=>"false",
+                "msg"=>"No se encontro información en la base de datos",
+            ];
+         }
+         echo json_encode($data);
+	
+	}
 	public function save_select(){
 		$name_input=$this->input->post('input');
 		$nombre=$this->input->post('value');
@@ -404,6 +421,8 @@ class Mantenimiento extends CI_Controller {
 				$result= $this->mantenimiento->guardar_cargo($datos);
 			}elseif ($name_input=="asignatura") {
 				$result= $this->mantenimiento->guardar_asignatura($datos);
+			}elseif ($name_input=="nivel") {
+				$result= $this->mantenimiento->guardar_nivel($datos);
 			}
 
 		}else{
@@ -422,6 +441,8 @@ class Mantenimiento extends CI_Controller {
 				$result= $this->mantenimiento->edit_cargo($datos);
 			}elseif ($name_input=="asignatura") {
 				$result= $this->mantenimiento->edit_asignatura($datos);
+			}elseif ($name_input=="nivel") {
+				$result= $this->mantenimiento->edit_nivel($datos);
 			}
 		}
 
@@ -517,6 +538,22 @@ class Mantenimiento extends CI_Controller {
 	public function deletAsignatura(){
 		$id=$this->input->post('id');
 		$delete = $this->mantenimiento->delete_asignatura($id);
+		if ($delete=true) {
+            $data=[
+                "resp"=>"true",
+                "msg"=>"Se elimino Registro",
+            ];
+         }else{
+            $data=[
+                "resp"=>"false",
+                "msg"=>"Error al Eliminar Registro",
+            ];
+         }
+         echo json_encode($data);
+	}
+	public function deletNivel(){
+		$id=$this->input->post('id');
+		$delete = $this->mantenimiento->delete_nivel($id);
 		if ($delete=true) {
             $data=[
                 "resp"=>"true",

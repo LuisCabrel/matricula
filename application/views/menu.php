@@ -57,7 +57,7 @@
                         <a href="#"><span class="fa fa-group"></span> <span class="xn-text">Estudiante</span></a>
                         <ul>
                             <li class="li"><a href="<?php echo base_url();?>estudiante/registro_estudiante"><span class="fa fa-id-card-o"></span> Registro Estudiante</a></li>
-                            <li class="li"><a href="<?php echo base_url();?>dashboard/asistencia"><span class="fa fa-check-circle"></span> Control de Asistencia</a></li>                            
+                            <li class="li"><a href="<?php echo base_url();?>estudiante/asistencia"><span class="fa fa-check-circle"></span> Control de Asistencia</a></li>                            
                         </ul>
                     </li>
                     <li class="xn-openable">

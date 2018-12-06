@@ -107,6 +107,16 @@ class Mantenimiento_model extends CI_Model{
             return false;
         }
 	}
+	public function listaNivel(){
+		$this->db->select("*");
+		$this->db->from("nivel");		
+		$query = $this->db->get();
+		if($query->num_rows()>0){
+            return $query->result();
+        }else{
+            return false;
+        }
+	}
 	public function guardar_especialidad($data){
 	 	$this->db->insert('especialidad', $data);
         return true;
@@ -125,6 +135,10 @@ class Mantenimiento_model extends CI_Model{
 	 }
 	 public function guardar_asignatura($data){
 	 	$this->db->insert('asignatura', $data);
+        return true;
+	 }
+	 public function guardar_nivel($data){
+	 	$this->db->insert('nivel', $data);
         return true;
 	 }
 	public function edit_especialidad($datos){
@@ -147,6 +161,10 @@ class Mantenimiento_model extends CI_Model{
 		$this->db->update_batch('asignatura', $datos,'id');
         return true;
 	}
+	public function edit_nivel($datos){
+		$this->db->update_batch('nivel', $datos,'id');
+        return true;
+	}
 	public function delete_especialidad($id){
 	 	$this->db->where('id',$id);
         return $this->db->delete('especialidad');
@@ -166,6 +184,10 @@ class Mantenimiento_model extends CI_Model{
 	public function delete_asignatura($id){
 	 	$this->db->where('id',$id);
         return $this->db->delete('asignatura');
+	}
+	public function delete_nivel($id){
+	 	$this->db->where('id',$id);
+        return $this->db->delete('nivel');
 	}
 /*public function lista_escuela(){
 		$this->db->select('a.*,(b.departamento)as nomDepa,(c.provincia)as nomProv,(d.distrito)as nomDist');

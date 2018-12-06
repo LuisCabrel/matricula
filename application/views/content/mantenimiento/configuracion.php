@@ -227,6 +227,47 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-4">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">                                
+                                    <h3 class="panel-title">Nivel</h3>   
+                                    <ul class="panel-controls">
+                                        <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span></a></li>
+                                        <li><a href="#" class="panel-refresh"><span class="fa fa-refresh"></span></a></li>
+                                        <li><a href="#" class="panel-remove"><span class="fa fa-times"></span></a></li>
+                                    </ul>                                
+                                </div>
+                                <div class="panel-body">
+                                    
+                                    <form class="form-inline" role="form" id="formNivel">
+                                        <label class="col-md-12">Nivel</label>
+                                        <div class="form-group">                                            
+                                            <div class="input-group">  
+                                            <input type="hidden" name="id" id="idnivel" value="">
+                                            <input type="hidden" name="status" id="statusnivel" value="save">                                         
+                                                <input class="form-control" type="text" id="nivel" placeholder="" onkeyup="busqueda(this.value,'tblAsignatura')" />
+                                            </div>
+                                        </div> 
+                                        <span id="btnasignatura">
+                                            <button type="button" class="btn btn-primary" id="btnsaveCargo" onclick="guardarConfiguracion('formNivel','nivel','save_select','tbl_nivel()')"><i class="fa fa-save"></i></button>
+                                        </span>                                   
+                                        
+                                    </form> 
+                                    
+                                    <table class="table display" id="">
+                                        <thead>
+                                            <tr>
+                                                <th>Nivel</th>
+                                                <th>Accion</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tblNivel">
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                         
                     </div>
                 </div>

@@ -399,6 +399,26 @@ function tbl_asignatura(){
         }
     })
 }
+function tbl_nivel(){
+    $.ajax({
+        url: 'lista_nivel',
+        dataType: "json",
+        success: function(resp){
+            var html="";
+                for(var x=0;x<resp.datos.length;x++){    
+                
+                 html+='<tr>'+
+                        '<td><span id="nivel'+resp.datos[x]['id']+'">'+resp.datos[x]['nombre']+'</span></td>'+
+                        '<td><div class="row"><center>'+
+                            '<i class="fa fa-pencil-square btn-tabla-edit" onclick="editConfig('+resp.datos[x]['id']+",'nivel'"+",'formNivel'"+",'save_select'"+",'tbl_nivel()'"+')"></i>'+
+                            '<i class="fa fa-times-rectangle btn-tabla-delete" onclick="msgDelete('+resp.datos[x]['id']+",'deleteData'"+",'deletNivel'"+",'tbl_nivel()'"+')"></i></center></div>'+
+                        '</td>'+                       
+                        '</tr>';                
+                }
+                $("#tblAsignatura").html(html);             
+        }
+    })
+}
 function guardarConfiguracion(form,input,destUrl,tabla){    
     if($('#'+input).val()==""){
         $('#'+form).addClass('has-error'); 

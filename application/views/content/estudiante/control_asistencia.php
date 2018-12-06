@@ -60,6 +60,7 @@
                                     <table class="table display">
                                         <thead>
                                             <tr>
+                                                <th>Codigo</th>
                                                 <th>Nombre</th>
                                                 <th>Accion</th>
                                             </tr>
